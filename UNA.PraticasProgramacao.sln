@@ -1,0 +1,55 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29326.143
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Client", "Client", "{CA02859E-4521-4D15-8A31-E12D0EDCEC0B}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Common", "Common", "{080F11FE-225C-454E-800A-820CECEAD259}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UNA.PraticasProgramacao.Desktop", "Client\UNA.PraticasProgramacao.Desktop\UNA.PraticasProgramacao.Desktop.csproj", "{04356709-D317-4DA2-BC19-78415548F1D1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UNA.PraticasProgramacao.Entidades", "Common\UNA.PraticasProgramacao.Entidades\UNA.PraticasProgramacao.Entidades.csproj", "{C32B7026-16F2-47B1-AF14-19BAEB9BEC39}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Servers", "Servers", "{5F704EE5-DE6A-40F7-934E-A45CA1F0E9AA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UNA.PraticasProgramacao.ParceiroCrud", "Client\UNA.PraticasProgramacao.ParceiroCrud\UNA.PraticasProgramacao.ParceiroCrud.csproj", "{22EA221E-FC0F-40B6-8642-FB00C93A9682}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UNA.PraticasProgramacao.DatabaseServices", "Servers\UNA.PraticasProgramacao.DatabaseServices\UNA.PraticasProgramacao.DatabaseServices.csproj", "{A9EF57EA-569C-463C-884A-23A930D857AF}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{04356709-D317-4DA2-BC19-78415548F1D1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{04356709-D317-4DA2-BC19-78415548F1D1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{04356709-D317-4DA2-BC19-78415548F1D1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{04356709-D317-4DA2-BC19-78415548F1D1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C32B7026-16F2-47B1-AF14-19BAEB9BEC39}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C32B7026-16F2-47B1-AF14-19BAEB9BEC39}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C32B7026-16F2-47B1-AF14-19BAEB9BEC39}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C32B7026-16F2-47B1-AF14-19BAEB9BEC39}.Release|Any CPU.Build.0 = Release|Any CPU
+		{22EA221E-FC0F-40B6-8642-FB00C93A9682}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{22EA221E-FC0F-40B6-8642-FB00C93A9682}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{22EA221E-FC0F-40B6-8642-FB00C93A9682}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{22EA221E-FC0F-40B6-8642-FB00C93A9682}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A9EF57EA-569C-463C-884A-23A930D857AF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A9EF57EA-569C-463C-884A-23A930D857AF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A9EF57EA-569C-463C-884A-23A930D857AF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A9EF57EA-569C-463C-884A-23A930D857AF}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{04356709-D317-4DA2-BC19-78415548F1D1} = {CA02859E-4521-4D15-8A31-E12D0EDCEC0B}
+		{C32B7026-16F2-47B1-AF14-19BAEB9BEC39} = {080F11FE-225C-454E-800A-820CECEAD259}
+		{22EA221E-FC0F-40B6-8642-FB00C93A9682} = {CA02859E-4521-4D15-8A31-E12D0EDCEC0B}
+		{A9EF57EA-569C-463C-884A-23A930D857AF} = {5F704EE5-DE6A-40F7-934E-A45CA1F0E9AA}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {F6260FEA-CB1F-49A8-9F0D-A2025861AD04}
+	EndGlobalSection
+EndGlobal
