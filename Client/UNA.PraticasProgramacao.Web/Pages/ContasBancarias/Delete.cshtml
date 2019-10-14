@@ -1,0 +1,47 @@
+﻿@page
+@model UNA.PraticasProgramacao.Web.Pages.ContasBancarias.DeleteModel
+
+@{
+    ViewData["Title"] = "Delete";
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>ContaBancaria</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.ContaBancaria.Banco)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.ContaBancaria.Banco)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.ContaBancaria.Agencia)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.ContaBancaria.Agencia)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.ContaBancaria.NumeroConta)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.ContaBancaria.NumeroConta)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.ContaBancaria.SaldoInicial)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.ContaBancaria.SaldoInicial)
+        </dd>
+    </dl>
+    
+    <form method="post">
+        <input type="hidden" asp-for="ContaBancaria.IdContaBancaria" />
+        <input type="submit" value="Delete" class="btn btn-default" /> |
+        <a asp-page="./Index">Back to List</a>
+    </form>
+</div>

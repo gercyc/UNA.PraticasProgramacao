@@ -1,0 +1,77 @@
+﻿@page
+@model UNA.PraticasProgramacao.Web.Pages.LancFinanceiro.CreateModel
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+
+<h2>Create</h2>
+
+<h4>LancamentoFinanceiro</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="LancamentoFinanceiro.NumeroLancamento" class="control-label"></label>
+                <input asp-for="LancamentoFinanceiro.NumeroLancamento" class="form-control" />
+                <span asp-validation-for="LancamentoFinanceiro.NumeroLancamento" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="LancamentoFinanceiro.DataCriacao" class="control-label"></label>
+                <input asp-for="LancamentoFinanceiro.DataCriacao" class="form-control" />
+                <span asp-validation-for="LancamentoFinanceiro.DataCriacao" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="LancamentoFinanceiro.DataVencimento" class="control-label"></label>
+                <input asp-for="LancamentoFinanceiro.DataVencimento" class="form-control" />
+                <span asp-validation-for="LancamentoFinanceiro.DataVencimento" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="LancamentoFinanceiro.IdCentroCusto" class="control-label"></label>
+                <select asp-for="LancamentoFinanceiro.IdCentroCusto" class ="form-control" asp-items="ViewBag.IdCentroCusto"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="LancamentoFinanceiro.TipoLancamento" class="control-label"></label>
+                <input asp-for="LancamentoFinanceiro.TipoLancamento" class="form-control" />
+                <span asp-validation-for="LancamentoFinanceiro.TipoLancamento" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="LancamentoFinanceiro.HistoricoLancamento" class="control-label"></label>
+                <input asp-for="LancamentoFinanceiro.HistoricoLancamento" class="form-control" />
+                <span asp-validation-for="LancamentoFinanceiro.HistoricoLancamento" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="LancamentoFinanceiro.ValorLancamento" class="control-label"></label>
+                <input asp-for="LancamentoFinanceiro.ValorLancamento" class="form-control" />
+                <span asp-validation-for="LancamentoFinanceiro.ValorLancamento" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="LancamentoFinanceiro.IdContaBancaria" class="control-label"></label>
+                <select asp-for="LancamentoFinanceiro.IdContaBancaria" class ="form-control" asp-items="ViewBag.IdContaBancaria"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="LancamentoFinanceiro.DataPagamento" class="control-label"></label>
+                <input asp-for="LancamentoFinanceiro.DataPagamento" class="form-control" />
+                <span asp-validation-for="LancamentoFinanceiro.DataPagamento" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="LancamentoFinanceiro.IdParceiro" class="control-label"></label>
+                <select asp-for="LancamentoFinanceiro.IdParceiro" class ="form-control" asp-items="ViewBag.IdParceiro"></select>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

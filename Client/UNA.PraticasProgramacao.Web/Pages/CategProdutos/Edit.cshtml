@@ -1,0 +1,41 @@
+﻿@page
+@model UNA.PraticasProgramacao.Web.Pages.CategProdutos.EditModel
+
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+
+<h2>Edit</h2>
+
+<h4>CategoriaProduto</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="CategoriaProduto.IdCategoria" />
+            <div class="form-group">
+                <label asp-for="CategoriaProduto.CodigoCategoria" class="control-label"></label>
+                <input asp-for="CategoriaProduto.CodigoCategoria" class="form-control" />
+                <span asp-validation-for="CategoriaProduto.CodigoCategoria" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CategoriaProduto.DescricaoCategoria" class="control-label"></label>
+                <input asp-for="CategoriaProduto.DescricaoCategoria" class="form-control" />
+                <span asp-validation-for="CategoriaProduto.DescricaoCategoria" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="./Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

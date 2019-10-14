@@ -1,0 +1,80 @@
+﻿@page
+@model UNA.PraticasProgramacao.Web.Pages.LancFinanceiro.DetailsModel
+
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>LancamentoFinanceiro</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.LancamentoFinanceiro.NumeroLancamento)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.LancamentoFinanceiro.NumeroLancamento)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.LancamentoFinanceiro.DataCriacao)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.LancamentoFinanceiro.DataCriacao)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.LancamentoFinanceiro.DataVencimento)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.LancamentoFinanceiro.DataVencimento)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.LancamentoFinanceiro.TipoLancamento)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.LancamentoFinanceiro.TipoLancamento)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.LancamentoFinanceiro.HistoricoLancamento)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.LancamentoFinanceiro.HistoricoLancamento)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.LancamentoFinanceiro.ValorLancamento)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.LancamentoFinanceiro.ValorLancamento)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.LancamentoFinanceiro.DataPagamento)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.LancamentoFinanceiro.DataPagamento)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.LancamentoFinanceiro.CentroCusto)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.LancamentoFinanceiro.CentroCusto.NomeCentroCusto)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.LancamentoFinanceiro.ContaBancaria)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.LancamentoFinanceiro.ContaBancaria.Agencia)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.LancamentoFinanceiro.Parceiro)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.LancamentoFinanceiro.Parceiro.IdParceiro)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-page="./Edit" asp-route-id="@Model.LancamentoFinanceiro.IdLancamentoFinanceiro">Edit</a> |
+    <a asp-page="./Index">Back to List</a>
+</div>

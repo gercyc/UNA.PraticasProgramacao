@@ -1,0 +1,24 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <RootNamespace>ITSolution.Framework.Servers.Core.ApiMenu</RootNamespace>
+    <AssemblyName>ITSolution.Framework.Servers.Core.ApiMenu</AssemblyName>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="ITSolution.Framework.Core.Server" Version="1.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="ITSolution.Framework.Core">
+      <HintPath>..\..\..\ITSolution.FrameworkDeveloperCore\ITSolutionFrameworkNetCore\Common\ITSolution.Framework.Core\bin\Debug\netcoreapp2.2\ITSolution.Framework.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNetCore.Mvc.Core">
+      <HintPath>..\..\..\..\..\..\..\Program Files\dotnet\sdk\NuGetFallbackFolder\microsoft.aspnetcore.mvc.core\2.2.0\lib\netstandard2.0\Microsoft.AspNetCore.Mvc.Core.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+
+</Project>

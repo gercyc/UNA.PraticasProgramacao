@@ -1,0 +1,52 @@
+﻿@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
+<!-- Heading -->
+<div class="sidebar-heading">
+    Operações
+</div>
+<!-- Nav Item - Pages Collapse Menu -->
+
+@{
+    string url = string.Format("{0}://{1}/api/menu", this.Context.Request.Scheme, this.Context.Request.Host);
+
+    List<UNA.PraticasProgramacao.Core.Entidades.ItsMenu> MenusP = new List<Core.Entidades.ItsMenu>();
+
+    if (SignInManager.IsSignedIn(User))
+    {
+        MenusP = await ApiUtil.GetMenusList(url);
+    }
+
+    int menuIdPai = 0;
+    var mnuGrouped = MenusP.GroupBy(m => m.MenuPai).Select(g => new { Parent = g.Key, List = g.ToList() });
+}
+@foreach (var item in mnuGrouped.OrderBy(mo => mo.Parent))
+{
+    foreach (var mnuParent in item.List.Where(mn => mn.MenuPai == null && mn.MenuType == "Page"))
+    {
+        menuIdPai = mnuParent.IdMenu;
+        <li class="nav-item">
+            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target=@string.Concat("#collapseTwo", mnuParent.IdMenu) aria-expanded="true" aria-controls=@string.Concat("collapseTwo", mnuParent.IdMenu)>
+                <i class="fas fa-chevron-right"></i>
+                <span>@mnuParent.MenuText</span>
+            </a>
+            <div id=@string.Concat("collapseTwo", mnuParent.IdMenu) class="collapse" aria-labelledby=@string.Concat("headingTwo", mnuParent.IdMenu) data-parent="#accordionSidebar">
+                <div class="bg-white py-2 collapse-inner rounded">
+                    @foreach (var childMenu in MenusP.Where(mnm => mnm.MenuPai == menuIdPai && mnm.MenuType == "Button"))
+                    {
+                        if (childMenu.ActionController != null)
+                        {
+                            <a class="collapse-item" href=@string.Concat(@childMenu.ControllerClass, "/", @childMenu.ActionController)>@childMenu.MenuText</a>
+
+                        }
+                        else
+                        {
+                            <a class="collapse-item" href="#">@childMenu.MenuText</a>
+
+                        }
+                    }
+                </div>
+            </div>
+        </li>
+    }
+}

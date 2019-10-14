@@ -1,0 +1,67 @@
+﻿@page
+@model UNA.PraticasProgramacao.Web.Pages.Movimentos.ItmMovimento.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Pages/Shared/_Layout_Grid.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    <a asp-page="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.ItemMovimento[0].Quantidade)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ItemMovimento[0].ValorUnitario)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ItemMovimento[0].ValorTotal)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ItemMovimento[0].ValorDesconto)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ItemMovimento[0].Movimento)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ItemMovimento[0].Produtos)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.ItemMovimento) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Quantidade)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ValorUnitario)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ValorTotal)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ValorDesconto)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Movimento.IdMovimento)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Produtos.IdProduto)
+            </td>
+            <td>
+                <a asp-page="./Edit" asp-route-id="@item.IdItemMovimento">Edit</a> |
+                <a asp-page="./Details" asp-route-id="@item.IdItemMovimento">Details</a> |
+                <a asp-page="./Delete" asp-route-id="@item.IdItemMovimento">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

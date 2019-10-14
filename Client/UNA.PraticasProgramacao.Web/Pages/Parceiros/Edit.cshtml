@@ -1,0 +1,77 @@
+﻿@page
+@model UNA.PraticasProgramacao.Web.Pages.Parceiros.EditModel
+
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+
+<h1>Edit</h1>
+
+<h4>Parceiro</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Parceiro.IdParceiro" />
+            <div class="form-group">
+                <label asp-for="Parceiro.NomeParceiro" class="control-label"></label>
+                <input asp-for="Parceiro.NomeParceiro" class="form-control" />
+                <span asp-validation-for="Parceiro.NomeParceiro" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Parceiro.TipoParceiro" class="control-label"></label>
+                <select asp-for="Parceiro.TipoParceiro" class="form-control"></select>
+                <span asp-validation-for="Parceiro.TipoParceiro" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Parceiro.CpfCnpj" class="control-label"></label>
+                <input asp-for="Parceiro.CpfCnpj" class="form-control" />
+                <span asp-validation-for="Parceiro.CpfCnpj" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Parceiro.NomeEndereco" class="control-label"></label>
+                <input asp-for="Parceiro.NomeEndereco" class="form-control" />
+                <span asp-validation-for="Parceiro.NomeEndereco" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Parceiro.NumeroEndereco" class="control-label"></label>
+                <input asp-for="Parceiro.NumeroEndereco" class="form-control" />
+                <span asp-validation-for="Parceiro.NumeroEndereco" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Parceiro.Complemento" class="control-label"></label>
+                <input asp-for="Parceiro.Complemento" class="form-control" />
+                <span asp-validation-for="Parceiro.Complemento" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Parceiro.Bairro" class="control-label"></label>
+                <input asp-for="Parceiro.Bairro" class="form-control" />
+                <span asp-validation-for="Parceiro.Bairro" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Parceiro.Municipio" class="control-label"></label>
+                <input asp-for="Parceiro.Municipio" class="form-control" />
+                <span asp-validation-for="Parceiro.Municipio" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Parceiro.Estado" class="control-label"></label>
+                <input asp-for="Parceiro.Estado" class="form-control" />
+                <span asp-validation-for="Parceiro.Estado" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="./Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");
+        }
+}
