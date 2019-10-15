@@ -31,24 +31,24 @@ namespace UNA.PraticasProgramacao.Web.Pages
         public string QtdReceber { get; set; }
 
 
-        public async Task OnGetAsync()
+        public void OnGetAsync()
         {
 
-            Lancamentos = await _context.LancamentoFinanceiro.ToListAsync();
+            //Lancamentos = await _context.LancamentoFinanceiro.ToListAsync();
 
-            ReceberProx30Dias = Lancamentos.Where(l => l.TipoLancamento == EnumTipoLancamento.Receber
-            && l.DataVencimento > DateTime.Now
+            ReceberProx30Dias = _context.LancamentoFinanceiro.Where(l => l.TipoLancamento == EnumTipoLancamento.Receber
+            && l.DataVencimento > DateTime.Now.AddDays(-75)
             && l.DataVencimento < DateTime.Now.AddDays(30)
             && !l.DataPagamento.HasValue).Sum(l => l.ValorLancamento.Value).ToString("N2");
 
-            PagarProx30Dias = (Lancamentos.Where(l => l.TipoLancamento == EnumTipoLancamento.Pagar
-            && l.DataVencimento > DateTime.Now
+            PagarProx30Dias = (_context.LancamentoFinanceiro.Where(l => l.TipoLancamento == EnumTipoLancamento.Pagar
+            && l.DataVencimento > DateTime.Now.AddDays(-30)
             && l.DataVencimento < DateTime.Now.AddDays(30)
             && !l.DataPagamento.HasValue).Sum(l => l.ValorLancamento.Value) * -1).ToString("N2");
 
-            double pagar = Lancamentos.Where(l => l.TipoLancamento == EnumTipoLancamento.Pagar
+            double pagar = _context.LancamentoFinanceiro.Where(l => l.TipoLancamento == EnumTipoLancamento.Pagar
             && !l.DataPagamento.HasValue).Count();
-            double receber = Lancamentos.Where(l => l.TipoLancamento == EnumTipoLancamento.Receber
+            double receber = _context.LancamentoFinanceiro.Where(l => l.TipoLancamento == EnumTipoLancamento.Receber
             && !l.DataPagamento.HasValue).Count();
 
 

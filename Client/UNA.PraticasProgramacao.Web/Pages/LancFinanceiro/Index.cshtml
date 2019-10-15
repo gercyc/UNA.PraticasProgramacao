@@ -11,81 +11,91 @@
 <p>
     <a asp-page="Create">Create New</a>
 </p>
-<table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.LancamentoFinanceiro[0].NumeroLancamento)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.LancamentoFinanceiro[0].DataCriacao)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.LancamentoFinanceiro[0].DataVencimento)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.LancamentoFinanceiro[0].TipoLancamento)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.LancamentoFinanceiro[0].HistoricoLancamento)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.LancamentoFinanceiro[0].ValorLancamento)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.LancamentoFinanceiro[0].DataPagamento)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.LancamentoFinanceiro[0].CentroCusto)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.LancamentoFinanceiro[0].ContaBancaria)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.LancamentoFinanceiro[0].Parceiro)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model.LancamentoFinanceiro) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.NumeroLancamento)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DataCriacao)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DataVencimento)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.TipoLancamento)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.HistoricoLancamento)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ValorLancamento)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DataPagamento)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CentroCusto.NomeCentroCusto)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ContaBancaria.Agencia)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Parceiro.NomeParceiro)
-            </td>
-            <td>
-                <a asp-page="./Edit" asp-route-id="@item.IdLancamentoFinanceiro">Edit</a> |
-                <a asp-page="./Details" asp-route-id="@item.IdLancamentoFinanceiro">Details</a> |
-                <a asp-page="./Delete" asp-route-id="@item.IdLancamentoFinanceiro">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+<form method="post">
+    <div class="col-sm-4">
+        <label asp-for="SelCount" class="control-label">Exibir: </label>
+        <select asp-for="SelCount" class="form-control" asp-items="ViewBag.Qtd" onchange="this.form.submit()"></select>
+    </div>
+</form>
+    <hr />
+    <div>
+    </div>
+    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.LancamentoFinanceiro[0].NumeroLancamento)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.LancamentoFinanceiro[0].DataCriacao)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.LancamentoFinanceiro[0].DataVencimento)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.LancamentoFinanceiro[0].TipoLancamento)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.LancamentoFinanceiro[0].HistoricoLancamento)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.LancamentoFinanceiro[0].ValorLancamento)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.LancamentoFinanceiro[0].DataPagamento)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.LancamentoFinanceiro[0].CentroCusto)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.LancamentoFinanceiro[0].ContaBancaria)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.LancamentoFinanceiro[0].Parceiro)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.LancamentoFinanceiro)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.NumeroLancamento)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.DataCriacao)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.DataVencimento)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.TipoLancamento)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.HistoricoLancamento)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ValorLancamento)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.DataPagamento)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CentroCusto.NomeCentroCusto)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ContaBancaria.Agencia)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Parceiro.NomeParceiro)
+                    </td>
+                    <td>
+                        <a asp-page="./Edit" asp-route-id="@item.IdLancamentoFinanceiro">Edit</a> |
+                        <a asp-page="./Details" asp-route-id="@item.IdLancamentoFinanceiro">Details</a> |
+                        <a asp-page="./Delete" asp-route-id="@item.IdLancamentoFinanceiro">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>

@@ -23,7 +23,7 @@ namespace UNA.PraticasProgramacao.Web.Pages.LancFinanceiro
         {
         ViewData["IdCentroCusto"] = new SelectList(_context.CentroCusto, "IdCentroCusto", "NomeCentroCusto");
         ViewData["IdContaBancaria"] = new SelectList(_context.ContaBancaria, "IdContaBancaria", "Agencia");
-        ViewData["IdParceiro"] = new SelectList(_context.Parceiro, "IdParceiro", "IdParceiro");
+        ViewData["IdParceiro"] = new SelectList(_context.Parceiro, "IdParceiro", "NomeParceiro");
             return Page();
         }
 
