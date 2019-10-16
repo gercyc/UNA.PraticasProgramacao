@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
@@ -18,6 +19,12 @@ namespace UNA.PraticasProgramacao.Web.Data
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
+
+            foreach (var item in builder.Model.GetEntityTypes().SelectMany(p => p.GetProperties().Where(pr => pr.ClrType == typeof(string))))
+            {
+                if (item.GetColumnType() == "nvarchar")
+                    item.SetColumnType("varchar");
+            }
 
         }
 

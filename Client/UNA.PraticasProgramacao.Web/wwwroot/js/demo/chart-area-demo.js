@@ -33,12 +33,14 @@ var todos = [];
 function getItems() {
     fetch(uri)
         .then(response => response.json())
-        .then(data => _displayItems(data))
+        .then(data => function (data) { _displayItems(data); })
         .catch(error => console.error('Unable to get items.', error));
 }
 
-function _displayItems(data) {
+function _displayItems(data)
+{
 todos = data;
+
 }
 // Area Chart Example
 var ctx = document.getElementById("myAreaChart");

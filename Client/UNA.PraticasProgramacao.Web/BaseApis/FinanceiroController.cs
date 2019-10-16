@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using UNA.PraticasProgramacao.Core.Entidades;
 using UNA.PraticasProgramacao.Web.Data;
 
@@ -28,26 +29,49 @@ namespace UNA.PraticasProgramacao.Web.BaseApis
             return menus;
         }
         [HttpGet("ChartData")]
-        public IEnumerable<ChartData> GetChartData()
+        public IEnumerable<LineChartData> GetChartData()
         {
-            var menus = _context.LancamentoFinanceiro.AsEnumerable();
+            var lancamentos = _context.LancamentoFinanceiro.AsEnumerable().OrderBy(f => f.DataVencimento);
 
-            var q = from d in menus
+            var q = from d in lancamentos
                     group d by new { Data = d.DataVencimento.Month.ToString().PadLeft(2, '0') + "/" + d.DataVencimento.Year }
                     into grp
-                    select new ChartData { Periodo = grp.Key.Data, Valor = grp.Sum(g => g.TipoLancamento == Core.Entidades.Entidades.EnumTipoLancamento.Pagar ? g.ValorLancamento.Value * -1 : g.ValorLancamento.Value) };
+                    select new LineChartData { Periodo = grp.Key.Data, Valor = grp.Sum(g => g.TipoLancamento == Core.Entidades.Entidades.EnumTipoLancamento.Pagar ? g.ValorLancamento.Value * -1 : g.ValorLancamento.Value) };
 
             return q.AsEnumerable();
         }
 
-        public class ChartData
+        [HttpGet("PieChartData")]
+        public IEnumerable<PieChartData> GetPieChartData()
         {
-            public ChartData()
-            {
+            var lancamentos = _context.LancamentoFinanceiro.Include(l => l.CentroCusto).AsEnumerable().OrderBy(f => f.DataVencimento);
 
-            }
-            public string Periodo { get; set; }
-            public decimal Valor { get; set; }
+            var q = from d in lancamentos
+                    group d by new { Centro = d.CentroCusto.NomeCentroCusto }
+                    into grp
+                    select new PieChartData { Centro = grp.Key.Centro, Valor = grp.Sum(g => g.TipoLancamento == Core.Entidades.Entidades.EnumTipoLancamento.Pagar ? g.ValorLancamento.Value * -1 : g.ValorLancamento.Value) };
+
+            return q.AsEnumerable();
         }
+
+
+    }
+    public class LineChartData
+    {
+        public LineChartData()
+        {
+
+        }
+        public string Periodo { get; set; }
+        public decimal Valor { get; set; }
+    }
+    public class PieChartData
+    {
+        public PieChartData()
+        {
+
+        }
+        public string Centro { get; set; }
+        public decimal Valor { get; set; }
     }
 }

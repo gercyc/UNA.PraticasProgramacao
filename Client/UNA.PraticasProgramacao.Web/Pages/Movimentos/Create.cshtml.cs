@@ -21,9 +21,9 @@ namespace UNA.PraticasProgramacao.Web.Pages.Movimentos
 
         public IActionResult OnGet()
         {
-        ViewData["IdFormaPagamento"] = new SelectList(_context.FormaPagamento, "IdFormaPagamento", "IdFormaPagamento");
-        ViewData["IdParceiro"] = new SelectList(_context.Parceiro, "IdParceiro", "IdParceiro");
-        ViewData["IdTipoMovimento"] = new SelectList(_context.TipoMovimento, "IdTipoMovimento", "IdTipoMovimento");
+        ViewData["IdFormaPagamento"] = new SelectList(_context.FormaPagamento, "IdFormaPagamento", "DescricaoFormaPagamento");
+        ViewData["IdParceiro"] = new SelectList(_context.Parceiro, "IdParceiro", "NomeParceiro");
+        ViewData["IdTipoMovimento"] = new SelectList(_context.TipoMovimento, "IdTipoMovimento", "NomeTipoMovimento");
             return Page();
         }
 
