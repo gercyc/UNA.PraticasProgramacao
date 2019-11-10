@@ -1,9 +1,16 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.0</TargetFramework>
     <UserSecretsId>aspnet-UNA.PraticasProgramacao.Web-878FF65E-4139-4B9B-A0C5-88118986D3B3</UserSecretsId>
   </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Models\**" />
+    <Content Remove="Models\**" />
+    <EmbeddedResource Remove="Models\**" />
+    <None Remove="Models\**" />
+  </ItemGroup>
 
 
   <ItemGroup>
@@ -24,7 +31,7 @@
 
 
   <ItemGroup>
-    <Folder Include="Models\Identity\" />
+    <Folder Include="DatabaseFiles\" />
   </ItemGroup>
 
 </Project>

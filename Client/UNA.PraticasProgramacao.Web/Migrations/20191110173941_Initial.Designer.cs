@@ -7,11 +7,11 @@ using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using UNA.PraticasProgramacao.Web.Data;
 
-namespace UNA.PraticasProgramacao.Web.Data.Migrations
+namespace UNA.PraticasProgramacao.Web.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20191013192341_UserIdLancFin")]
-    partial class UserIdLancFin
+    [Migration("20191110173941_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -417,6 +417,9 @@ namespace UNA.PraticasProgramacao.Web.Data.Migrations
                     b.Property<int>("TipoLancamento")
                         .HasColumnType("int");
 
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)");
+
                     b.Property<decimal?>("ValorLancamento")
                         .HasColumnType("decimal(18,2)");
 
@@ -427,6 +430,8 @@ namespace UNA.PraticasProgramacao.Web.Data.Migrations
                     b.HasIndex("IdContaBancaria");
 
                     b.HasIndex("IdParceiro");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("LancamentoFinanceiro");
                 });
@@ -669,6 +674,10 @@ namespace UNA.PraticasProgramacao.Web.Data.Migrations
                     b.HasOne("UNA.PraticasProgramacao.Core.Entidades.Parceiro", "Parceiro")
                         .WithMany()
                         .HasForeignKey("IdParceiro");
+
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", "Usuario")
+                        .WithMany()
+                        .HasForeignKey("UserId");
                 });
 
             modelBuilder.Entity("UNA.PraticasProgramacao.Core.Entidades.Movimento", b =>

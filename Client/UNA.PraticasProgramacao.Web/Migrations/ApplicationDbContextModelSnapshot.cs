@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using UNA.PraticasProgramacao.Web.Data;
 
-namespace UNA.PraticasProgramacao.Web.Data.Migrations
+namespace UNA.PraticasProgramacao.Web.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
     partial class ApplicationDbContextModelSnapshot : ModelSnapshot
@@ -415,6 +415,9 @@ namespace UNA.PraticasProgramacao.Web.Data.Migrations
                     b.Property<int>("TipoLancamento")
                         .HasColumnType("int");
 
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)");
+
                     b.Property<decimal?>("ValorLancamento")
                         .HasColumnType("decimal(18,2)");
 
@@ -425,6 +428,8 @@ namespace UNA.PraticasProgramacao.Web.Data.Migrations
                     b.HasIndex("IdContaBancaria");
 
                     b.HasIndex("IdParceiro");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("LancamentoFinanceiro");
                 });
@@ -667,6 +672,10 @@ namespace UNA.PraticasProgramacao.Web.Data.Migrations
                     b.HasOne("UNA.PraticasProgramacao.Core.Entidades.Parceiro", "Parceiro")
                         .WithMany()
                         .HasForeignKey("IdParceiro");
+
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", "Usuario")
+                        .WithMany()
+                        .HasForeignKey("UserId");
                 });
 
             modelBuilder.Entity("UNA.PraticasProgramacao.Core.Entidades.Movimento", b =>
