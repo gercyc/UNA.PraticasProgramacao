@@ -41,7 +41,7 @@ namespace UNA.PraticasProgramacao.Web
 
             })
                 .AddEntityFrameworkStores<ApplicationDbContext>();
-            services.AddMvc();
+            services.AddMvc().AddJsonOptions(options => options.JsonSerializerOptions.PropertyNamingPolicy = null);
             services.AddRazorPages();
             services.AddControllersWithViews().AddRazorRuntimeCompilation();
         }

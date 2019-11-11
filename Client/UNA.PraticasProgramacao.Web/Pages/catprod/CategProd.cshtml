@@ -1,0 +1,55 @@
+﻿@page
+@{
+    ViewData["Title"] = "CategProd";
+    Layout = "~/Pages/Shared/_DevExtremeLayout.cshtml";
+}
+
+<h2>CategProd</h2>
+
+@(Html.DevExtreme().DataGrid<UNA.PraticasProgramacao.Core.Entidades.CategoriaProduto>()
+        .DataSource(ds => ds.Mvc()
+            .Controller("CategoriaProdutos")
+            .LoadAction("Get")
+            .InsertAction("Post")
+            .UpdateAction("Put")
+            .DeleteAction("Delete")
+            .Key("IdCategoria")
+        )
+        .RemoteOperations(true)
+        .Columns(columns =>
+        {
+
+            columns.AddFor(m => m.IdCategoria);
+
+            columns.AddFor(m => m.CodigoCategoria);
+
+            columns.AddFor(m => m.DescricaoCategoria);
+        })
+        .Editing(e => e.Mode(GridEditMode.Popup)
+            .AllowAdding(true)
+            .AllowUpdating(true).Popup(p => p
+                .Title("Employee Info")
+                .ShowTitle(true)
+                .Width(700)
+                .Height(525)
+                .Position(pos => pos
+                    .My(HorizontalAlignment.Center, VerticalAlignment.Center)
+                    .At(HorizontalAlignment.Center, VerticalAlignment.Center)
+                    .Of(new JS("window"))
+                )
+            ).Form(f => f.Items(items =>
+                {
+                    items.AddGroup()
+                    .ColCount(2)
+                    .ColSpan(2)
+                    .Items(groupItems =>
+                        {
+                        groupItems.AddSimpleFor(m => m.CodigoCategoria);
+                        groupItems.AddSimpleFor(m => m.DescricaoCategoria);
+                    });
+
+
+            }))
+            .AllowDeleting(true)
+            ));
+)

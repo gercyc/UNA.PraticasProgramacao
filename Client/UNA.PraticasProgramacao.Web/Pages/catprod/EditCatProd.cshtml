@@ -1,0 +1,18 @@
+﻿@page
+@{
+    ViewData["Title"] = "EditCatProd";
+    Layout = "~/Pages/Shared/_DevExtremeLayout.cshtml";
+}
+
+<h2>EditCatProd</h2>
+
+@(Html.DevExtreme().Form<UNA.PraticasProgramacao.Core.Entidades.CategoriaProduto>()
+    .Items(items => {
+
+        items.AddSimpleFor(m => m.IdCategoria);
+
+        items.AddSimpleFor(m => m.CodigoCategoria);
+
+        items.AddSimpleFor(m => m.DescricaoCategoria);
+    })
+)
