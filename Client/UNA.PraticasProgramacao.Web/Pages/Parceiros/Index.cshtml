@@ -2,14 +2,14 @@
 @model UNA.PraticasProgramacao.Web.Pages.Parceiros.IndexModel
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Parceiros";
     Layout = "~/Pages/Shared/_Layout_Grid.cshtml";
 }
 
-<h1>Index</h1>
+<h2>Parceiros</h2>
 
 <p>
-    <a asp-page="Create">Create New</a>
+    <a asp-page="Create">Novo</a>
 </p>
 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
     <thead>
@@ -75,9 +75,9 @@
                 @Html.DisplayFor(modelItem => item.Estado)
             </td>
             <td>
-                <a class="btn btn-primary btn-circle btn-sm" asp-page="./Edit" asp-route-id="@item.IdParceiro">Edit</a> |
-                <a class="btn btn-primary btn-circle btn-sm" asp-page="./Details" asp-route-id="@item.IdParceiro">Details</a> |
-                <a class="btn btn-primary btn-circle btn-sm" asp-page="./Delete" asp-route-id="@item.IdParceiro">Delete</a>
+                <a class="btn btn-primary btn-circle btn-sm" asp-page="./Edit" asp-route-id="@item.IdParceiro">Editar</a> |
+                <a class="btn btn-primary btn-circle btn-sm" asp-page="./Details" asp-route-id="@item.IdParceiro">Detalhes</a> |
+                <a class="btn btn-primary btn-circle btn-sm" asp-page="./Delete" asp-route-id="@item.IdParceiro">Remover</a>
             </td>
         </tr>
 }

@@ -2,14 +2,14 @@
 @model UNA.PraticasProgramacao.Web.Pages.CentroCustos.IndexModel
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Centros de Custo";
     Layout = "~/Pages/Shared/_Layout_Grid.cshtml";
 }
 
-<h2>Index</h2>
+<h2>Centros de Custo</h2>
 
 <p>
-    <a asp-page="Create">Create New</a>
+    <a asp-page="Create">Novo</a>
 </p>
 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
     <thead>
@@ -33,9 +33,9 @@
                 @Html.DisplayFor(modelItem => item.Responsavel)
             </td>
             <td>
-                <a class="btn btn-primary btn-circle btn-sm" asp-page="./Edit" asp-route-id="@item.IdCentroCusto">Edit</a> |
-                <a class="btn btn-primary btn-circle btn-sm" asp-page="./Details" asp-route-id="@item.IdCentroCusto">Details</a> |
-                <a class="btn btn-primary btn-circle btn-sm" asp-page="./Delete" asp-route-id="@item.IdCentroCusto">Delete</a>
+                <a asp-page="./Edit" asp-route-id="@item.IdCentroCusto">Editar</a> |
+                <a asp-page="./Details" asp-route-id="@item.IdCentroCusto">Detalhes</a> |
+                <a asp-page="./Delete" asp-route-id="@item.IdCentroCusto">Remover</a>
             </td>
         </tr>
 }

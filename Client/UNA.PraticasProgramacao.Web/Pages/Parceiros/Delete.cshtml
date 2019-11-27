@@ -6,11 +6,9 @@
     Layout = "~/Pages/Shared/_Layout.cshtml";
 }
 
-<h1>Delete</h1>
 
-<h3>Are you sure you want to delete this?</h3>
+<h4>Tem certeza que deseja remover o parceiro selecionado?</h4>
 <div>
-    <h4>Parceiro</h4>
     <hr />
     <dl class="row">
         <dt class="col-sm-2">
@@ -71,7 +69,7 @@
     
     <form method="post">
         <input type="hidden" asp-for="Parceiro.IdParceiro" />
-        <input type="submit" value="Delete" class="btn btn-danger" /> |
-        <a asp-page="./Index">Back to List</a>
+        <input type="submit" value="Remover" class="btn btn-danger" /> |
+        <a asp-page="./Index">Voltar à lista</a>
     </form>
 </div>

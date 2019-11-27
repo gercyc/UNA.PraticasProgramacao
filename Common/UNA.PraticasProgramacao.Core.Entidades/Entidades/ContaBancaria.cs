@@ -1,5 +1,6 @@
 namespace UNA.PraticasProgramacao.Core.Entidades
 {
+    using Microsoft.AspNetCore.Identity;
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
@@ -28,6 +29,11 @@ namespace UNA.PraticasProgramacao.Core.Entidades
         public string NumeroConta { get; set; }
 
         public decimal? SaldoInicial { get; set; }
+
+        public string UserId { get; set; }
+
+        [ForeignKey("UserId")]
+        public virtual IdentityUser Usuario { get; set; }
 
     }
 }

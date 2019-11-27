@@ -2,13 +2,12 @@
 @model UNA.PraticasProgramacao.Web.Pages.LancFinanceiro.CreateModel
 
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Movimentação Financeira";
     Layout = "~/Pages/Shared/_Layout.cshtml";
 }
 
-<h2>Create</h2>
 
-<h4>LancamentoFinanceiro</h4>
+<h4>Movimentação Financeira</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -62,14 +61,14 @@
                 <select asp-for="LancamentoFinanceiro.IdParceiro" class ="form-control" asp-items="ViewBag.IdParceiro"></select>
             </div>
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-default" />
+                <input type="submit" value="Cadastrar" class="btn btn-default" />
             </div>
         </form>
     </div>
 </div>
 
 <div>
-    <a asp-page="Index">Back to List</a>
+    <a asp-page="Index">Voltar à lista</a>
 </div>
 
 @section Scripts {
