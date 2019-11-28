@@ -22,12 +22,15 @@ namespace UNA.PraticasProgramacao.Core.Entidades
 
         [Required]
         [StringLength(6)]
+        [Display(Name = "Agência")]
         public string Agencia { get; set; }
 
         [Required]
         [StringLength(20)]
+        [Display(Name = "Número da Conta")]
         public string NumeroConta { get; set; }
 
+        [Display(Name = "Saldo Inicial")]
         public decimal? SaldoInicial { get; set; }
 
         public string UserId { get; set; }

@@ -27,27 +27,5 @@ namespace UNA.PraticasProgramacao.Web.BaseApis
             var menus = _context.Menu.Where(m => m.Status).AsEnumerable();
             return menus;
         }
-
-        // GET: api/Menu/5
-        //[HttpGet("{id}", Name = "Get")]
-        //public string Get(int id)
-        //{
-        //    return "value";
-        //}
-        // POST: api/Menu
-        //[HttpPost]
-        //public void Post([FromBody] string value)
-        //{
-        //}
-        // PUT: api/Menu/5
-        //[HttpPut("{id}")]
-        //public void Put(int id, [FromBody] string value)
-        //{
-        //}
-        // DELETE: api/ApiWithActions/5
-        //[HttpDelete("{id}")]
-        //public void Delete(int id)
-        //{
-        //}
     }
 }

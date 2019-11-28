@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
@@ -16,10 +17,12 @@ namespace UNA.PraticasProgramacao.Web.Pages
     {
         private readonly ILogger<IndexModel> _logger;
         private readonly ApplicationDbContext _context;
-        public IndexModel(ILogger<IndexModel> logger, ApplicationDbContext context)
+        SignInManager<IdentityUser> _signInManager;
+        public IndexModel(ILogger<IndexModel> logger, ApplicationDbContext context, SignInManager<IdentityUser> signInManager)
         {
             _logger = logger;
             _context = context;
+            _signInManager = signInManager;
         }
 
         public IList<UNA.PraticasProgramacao.Core.Entidades.LancamentoFinanceiro> Lancamentos { get; set; }
@@ -31,10 +34,11 @@ namespace UNA.PraticasProgramacao.Web.Pages
         public string QtdReceber { get; set; }
 
 
-        public void OnGetAsync()
+        public IActionResult OnGetAsync()
         {
 
-            //Lancamentos = await _context.LancamentoFinanceiro.ToListAsync();
+            if (!_signInManager.IsSignedIn(User))
+               return RedirectToPage("Landing");
 
             ReceberProx30Dias = _context.LancamentoFinanceiro.Where(l => l.TipoLancamento == EnumTipoLancamento.Receber
             && l.DataVencimento > DateTime.Now.AddDays(-75)
@@ -56,7 +60,7 @@ namespace UNA.PraticasProgramacao.Web.Pages
 
             QtdPagar = ((int)pagar).ToString();
             QtdReceber = ((int)receber).ToString();
-
+            return Page();
         }
     }
 }

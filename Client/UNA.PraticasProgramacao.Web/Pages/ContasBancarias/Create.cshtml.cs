@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -13,10 +14,12 @@ namespace UNA.PraticasProgramacao.Web.Pages.ContasBancarias
     public class CreateModel : PageModel
     {
         private readonly UNA.PraticasProgramacao.Web.Data.ApplicationDbContext _context;
+        private readonly UserManager<IdentityUser> _userManager;
 
-        public CreateModel(UNA.PraticasProgramacao.Web.Data.ApplicationDbContext context)
+        public CreateModel(UNA.PraticasProgramacao.Web.Data.ApplicationDbContext context, UserManager<IdentityUser> userManager)
         {
             _context = context;
+            _userManager = userManager;
         }
 
         public IActionResult OnGet()
@@ -35,7 +38,7 @@ namespace UNA.PraticasProgramacao.Web.Pages.ContasBancarias
             {
                 return Page();
             }
-
+            ContaBancaria.UserId = _userManager.GetUserId(User);
             _context.ContaBancaria.Add(ContaBancaria);
             await _context.SaveChangesAsync();
 

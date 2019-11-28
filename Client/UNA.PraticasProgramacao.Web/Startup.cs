@@ -12,6 +12,11 @@ using UNA.PraticasProgramacao.Web.Data;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
+using UNA.PraticasProgramacao.Web.Areas;
+using Microsoft.Extensions.Options;
+using Microsoft.AspNetCore.Authentication.Cookies;
 
 namespace UNA.PraticasProgramacao.Web
 {
@@ -30,6 +35,7 @@ namespace UNA.PraticasProgramacao.Web
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
+            
             services.AddDefaultIdentity<IdentityUser>(options =>
             {
                 options.SignIn.RequireConfirmedAccount = false;
@@ -39,9 +45,22 @@ namespace UNA.PraticasProgramacao.Web
                 options.Password.RequiredLength = 6;
                 options.Password.RequireLowercase = false;
 
-            })
-                .AddEntityFrameworkStores<ApplicationDbContext>();
-            services.AddMvc();
+            }).AddEntityFrameworkStores<ApplicationDbContext>().AddDefaultTokenProviders();
+
+            services.ConfigureApplicationCookie(options =>
+            {
+                options.AccessDeniedPath = "/Identity/Account/AccessDenied";
+                options.Cookie.Name = "UNAADSAUTH";
+                options.Cookie.HttpOnly = true;
+                options.ExpireTimeSpan = TimeSpan.FromMinutes(60);
+                options.LoginPath = "/Identity/Account/Login";
+                // ReturnUrlParameter requires 
+                //using Microsoft.AspNetCore.Authentication.Cookies;
+                options.ReturnUrlParameter = CookieAuthenticationDefaults.ReturnUrlParameter;
+                options.SlidingExpiration = true;
+            });
+
+            services.AddMvc().AddJsonOptions(options => { options.JsonSerializerOptions.IgnoreNullValues = true; });
             services.AddRazorPages();
             services.AddControllersWithViews().AddRazorRuntimeCompilation();
         }

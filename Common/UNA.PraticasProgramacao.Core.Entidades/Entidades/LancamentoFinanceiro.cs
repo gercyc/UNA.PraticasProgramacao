@@ -23,11 +23,14 @@ namespace UNA.PraticasProgramacao.Core.Entidades
         [Display(Name = "Data de Vencimento"), DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}")]
         public DateTime DataVencimento { get; set; }
 
+        [Display(Name = "Centro de Custo")]
         public int? IdCentroCusto { get; set; }
 
+        [Display(Name = "Tipo de Lançamento")]
         public EnumTipoLancamento TipoLancamento { get; set; }
 
         [StringLength(100)]
+        [Display(Name = "Histórico")]
         public string HistoricoLancamento { get; set; }
 
         [Display(Name = "Valor do lançamento"), DisplayFormat(DataFormatString ="{0:N2}")]
@@ -38,16 +41,19 @@ namespace UNA.PraticasProgramacao.Core.Entidades
         [Display(Name = "Data de Pagamento"), DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}")]
         public DateTime? DataPagamento { get; set; }
 
+        [Display(Name = "Parceiro")]
         public int? IdParceiro { get; set; }
 
-
         [ForeignKey("IdCentroCusto")]
+        [Display(Name = "Centro de Custo")]
         public virtual CentroCusto CentroCusto { get; set; }
 
         [ForeignKey("IdContaBancaria")]
+        [Display(Name = "Conta Bancária")] 
         public virtual ContaBancaria ContaBancaria { get; set; }
 
         [ForeignKey("IdParceiro")]
+        [Display(Name = "Parceiro")]
         public virtual Parceiro Parceiro { get; set; }
 
 

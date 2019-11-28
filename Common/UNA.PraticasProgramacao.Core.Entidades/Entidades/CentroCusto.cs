@@ -18,9 +18,11 @@ namespace UNA.PraticasProgramacao.Core.Entidades
 
         [Required]
         [StringLength(80)]
+        [Display(Name ="Nome do Centro")]
         public string NomeCentroCusto { get; set; }
 
         [StringLength(80)]
+        [Display(Name = "Responsável")]
         public string Responsavel { get; set; }
 
         public string UserId { get; set; }

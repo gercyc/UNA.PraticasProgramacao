@@ -28,17 +28,10 @@ namespace UNA.PraticasProgramacao.Web.Data
 
         }
 
-        public virtual DbSet<CategoriaProduto> CategoriaProduto { get; set; }
         public virtual DbSet<CentroCusto> CentroCusto { get; set; }
         public virtual DbSet<ContaBancaria> ContaBancaria { get; set; }
-        public virtual DbSet<FormaPagamento> FormaPagamento { get; set; }
-        public virtual DbSet<ItemMovimento> ItemMovimento { get; set; }
         public virtual DbSet<LancamentoFinanceiro> LancamentoFinanceiro { get; set; }
-        public virtual DbSet<Movimento> Movimento { get; set; }
         public virtual DbSet<Parceiro> Parceiro { get; set; }
-        public virtual DbSet<Produtos> Produtos { get; set; }
-        public virtual DbSet<TipoMovimento> TipoMovimento { get; set; }
-        public virtual DbSet<UnidadeMedida> UnidadeMedida { get; set; }
         public virtual DbSet<ItsMenu> Menu { get; set; }
     }
 }

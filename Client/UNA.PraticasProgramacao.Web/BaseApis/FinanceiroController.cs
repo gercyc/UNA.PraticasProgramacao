@@ -21,8 +21,8 @@ namespace UNA.PraticasProgramacao.Web.BaseApis
             _context = context;
         }
 
-        // GET: api/Menu
         [HttpGet]
+        [Authorize]
         public IEnumerable<LancamentoFinanceiro> Get()
         {
             var menus = _context.LancamentoFinanceiro.AsEnumerable();

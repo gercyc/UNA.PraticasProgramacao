@@ -13,7 +13,7 @@
     {
         ChartDataList = await UNA.PraticasProgramacao.Web.Pages.Shared.ApiUtil.GetChartData<UNA.PraticasProgramacao.Web.BaseApis.LineChartData>(url);
     }
-
+    
     var XLabels = Newtonsoft.Json.JsonConvert.SerializeObject(ChartDataList.Select(x => x.Periodo).ToList());
     var YValues = Newtonsoft.Json.JsonConvert.SerializeObject(ChartDataList.Select(x => x.Valor).ToList());
 }
