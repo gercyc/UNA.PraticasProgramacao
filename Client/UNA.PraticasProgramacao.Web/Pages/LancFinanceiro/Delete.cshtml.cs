@@ -31,8 +31,7 @@ namespace UNA.PraticasProgramacao.Web.Pages.LancFinanceiro
 
             LancamentoFinanceiro = await _context.LancamentoFinanceiro
                 .Include(l => l.CentroCusto)
-                .Include(l => l.ContaBancaria)
-                .Include(l => l.Parceiro).FirstOrDefaultAsync(m => m.IdLancamentoFinanceiro == id);
+                .Include(l => l.ContaBancaria).FirstOrDefaultAsync(m => m.IdLancamentoFinanceiro == id);
 
             if (LancamentoFinanceiro == null)
             {

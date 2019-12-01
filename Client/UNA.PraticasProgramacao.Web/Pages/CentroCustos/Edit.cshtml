@@ -1,8 +1,17 @@
-﻿@page
+﻿@*
+    UNA - Tecnologia em Analise e Desenvolvimento de sistemas
+    Disciplina:Práticas de Programação
+    Professor: Luiz Eduardo Carneiro
+    Período: 2º semestre/2019
+    Autores: Gercy Campos
+    Informações: Página para edição de um centro de custo
+*@
+
+@page
 @model UNA.PraticasProgramacao.Web.Pages.CentroCustos.EditModel
 
 @{
-    ViewData["Title"] = "Edit";
+    ViewData["Title"] = "Edição do Centro de Custo";
     Layout = "~/Pages/Shared/_Layout.cshtml";
 }
 
@@ -14,6 +23,7 @@
         <form method="post">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="CentroCusto.IdCentroCusto" />
+            <input type="hidden" asp-for="CentroCusto.UserId" />
             <div class="form-group">
                 <label asp-for="CentroCusto.NomeCentroCusto" class="control-label"></label>
                 <input asp-for="CentroCusto.NomeCentroCusto" class="form-control" />

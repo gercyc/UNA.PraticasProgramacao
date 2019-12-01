@@ -1,4 +1,14 @@
-﻿@using Microsoft.AspNetCore.Identity
+﻿@*
+    UNA - Tecnologia em Analise e Desenvolvimento de sistemas
+    Disciplina:Práticas de Programação
+    Professor: Luiz Eduardo Carneiro
+    Período: 2º semestre/2019
+    Autores: Gercy Campos
+    Informações: Pagina parcial para exibicao de itens relacionados ao login.
+*@
+
+
+@using Microsoft.AspNetCore.Identity
 @inject SignInManager<IdentityUser> SignInManager
 @inject UserManager<IdentityUser> UserManager
 
@@ -7,6 +17,7 @@
     {
         <li class="nav-item dropdown no-arrow">
             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="fas fa-cog fa-sm fa-fw mr-2 text-gray-400"></i>
                 <span class="mr-2 d-none d-lg-inline text-gray-600 small">@User.Identity.Name</span>
             </a>
             <!-- Dropdown - User Information -->
@@ -27,6 +38,7 @@
     {
         <li class="nav-item dropdown no-arrow">
             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="fas fa-cog fa-sm fa-fw mr-2 text-gray-400"></i>
                 <span class="mr-2 d-none d-lg-inline text-gray-600 small">Opcoes</span>
             </a>
             <!-- Dropdown - User Information -->

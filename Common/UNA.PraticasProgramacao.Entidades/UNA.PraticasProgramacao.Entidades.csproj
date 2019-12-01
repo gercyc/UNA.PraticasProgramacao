@@ -69,11 +69,5 @@
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\Servers\UNA.PraticasProgramacao.DatabaseServices\UNA.PraticasProgramacao.DatabaseServices.csproj">
-      <Project>{A9EF57EA-569C-463C-884A-23A930D857AF}</Project>
-      <Name>UNA.PraticasProgramacao.DatabaseServices</Name>
-    </ProjectReference>
-  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

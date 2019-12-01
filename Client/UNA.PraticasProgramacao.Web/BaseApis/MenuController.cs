@@ -1,4 +1,13 @@
-﻿using System;
+﻿/*
+    UNA - Tecnologia em Analise e Desenvolvimento de sistemas
+    Disciplina:Práticas de Programação
+    Professor: Luiz Eduardo Carneiro
+    Período: 2º semestre/2019
+    Autores: Gercy Campos
+    Informações: API para listagem de menu
+*/
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -20,7 +29,10 @@ namespace UNA.PraticasProgramacao.Web.BaseApis
             _context = context;
         }
 
-        // GET: api/Menu
+        /// <summary>
+        /// Metodo reponsavel por retornar um JSON com a lista de menus cadastrados no banco. Table: ITS_MENU
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         public IEnumerable<ItsMenu> Get()
         {

@@ -1,4 +1,14 @@
-﻿@page
+﻿@*
+    UNA - Tecnologia em Analise e Desenvolvimento de sistemas
+    Disciplina:Práticas de Programação
+    Professor: Luiz Eduardo Carneiro
+    Período: 2º semestre/2019
+    Autores: Gercy Campos
+    Informações: Página para edição de uma movimentacao financeira
+*@
+
+
+@page
 @model UNA.PraticasProgramacao.Web.Pages.LancFinanceiro.EditModel
 
 @{
@@ -14,16 +24,9 @@
         <form method="post">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="LancamentoFinanceiro.IdLancamentoFinanceiro" />
-            <div class="form-group">
-                <label asp-for="LancamentoFinanceiro.NumeroLancamento" class="control-label"></label>
-                <input asp-for="LancamentoFinanceiro.NumeroLancamento" class="form-control" />
-                <span asp-validation-for="LancamentoFinanceiro.NumeroLancamento" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="LancamentoFinanceiro.DataCriacao" class="control-label"></label>
-                <input asp-for="LancamentoFinanceiro.DataCriacao" class="form-control" type="date" />
-                <span asp-validation-for="LancamentoFinanceiro.DataCriacao" class="text-danger"></span>
-            </div>
+            <input type="hidden" asp-for="LancamentoFinanceiro.UserId" />
+            <input type="hidden" asp-for="LancamentoFinanceiro.DataCriacao" />
+            <input type="hidden" asp-for="LancamentoFinanceiro.NumeroLancamento" />
             <div class="form-group">
                 <label asp-for="LancamentoFinanceiro.DataVencimento" class="control-label"></label>
                 <input asp-for="LancamentoFinanceiro.DataVencimento" class="form-control" type="date" />
@@ -32,12 +35,10 @@
             <div class="form-group">
                 <label asp-for="LancamentoFinanceiro.IdCentroCusto" class="control-label"></label>
                 <select asp-for="LancamentoFinanceiro.IdCentroCusto" class="form-control" asp-items="ViewBag.IdCentroCusto"></select>
-                <span asp-validation-for="LancamentoFinanceiro.IdCentroCusto" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="LancamentoFinanceiro.TipoLancamento" class="control-label"></label>
-                <input asp-for="LancamentoFinanceiro.TipoLancamento" class="form-control" />
-                <span asp-validation-for="LancamentoFinanceiro.TipoLancamento" class="text-danger"></span>
+                <select asp-for="LancamentoFinanceiro.TipoLancamento" class="form-control" asp-items="@Html.GetEnumSelectList(typeof(UNA.PraticasProgramacao.Core.Entidades.Entidades.EnumTipoLancamento))"></select>
             </div>
             <div class="form-group">
                 <label asp-for="LancamentoFinanceiro.HistoricoLancamento" class="control-label"></label>
@@ -46,8 +47,8 @@
             </div>
             <div class="form-group">
                 <label asp-for="LancamentoFinanceiro.ValorLancamento" class="control-label"></label>
-                <input asp-for="LancamentoFinanceiro.ValorLancamento" class="form-control" />
-                <span asp-validation-for="LancamentoFinanceiro.ValorLancamento" class="text-danger"></span>
+                <input asp-for="LancamentoFinanceiro.ValorLancamentoStr" class="form-control" value="@Model.LancamentoFinanceiro.ValorLancamento" />
+                <span asp-validation-for="LancamentoFinanceiro.ValorLancamentoStr" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="LancamentoFinanceiro.IdContaBancaria" class="control-label"></label>
@@ -58,11 +59,6 @@
                 <label asp-for="LancamentoFinanceiro.DataPagamento" class="control-label"></label>
                 <input asp-for="LancamentoFinanceiro.DataPagamento" class="form-control" type="date" />
                 <span asp-validation-for="LancamentoFinanceiro.DataPagamento" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="LancamentoFinanceiro.IdParceiro" class="control-label"></label>
-                <select asp-for="LancamentoFinanceiro.IdParceiro" class="form-control" asp-items="ViewBag.IdParceiro"></select>
-                <span asp-validation-for="LancamentoFinanceiro.IdParceiro" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <input type="submit" value="Salvar" class="btn btn-default" />

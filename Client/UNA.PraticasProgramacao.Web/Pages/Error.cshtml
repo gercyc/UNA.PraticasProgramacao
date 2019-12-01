@@ -1,11 +1,20 @@
-﻿@page
+﻿@*
+    UNA - Tecnologia em Analise e Desenvolvimento de sistemas
+    Disciplina:Práticas de Programação
+    Professor: Luiz Eduardo Carneiro
+    Período: 2º semestre/2019
+    Autores: Gercy Campos
+    Informações: Página de erro da aplicação, é exibida quando ocorre algum erro. usada para exibir informacoes amigaveis ao usuário
+*@
+
+@page
 @model ErrorModel
 @{
-    ViewData["Title"] = "Error";
+    ViewData["Title"] = "Erro ocorrido";
 }
 
-<h1 class="text-danger">Error.</h1>
-<h2 class="text-danger">An error occurred while processing your request.</h2>
+<h1 class="text-danger">Erro na requisição.</h1>
+<h2 class="text-danger">Ocorreu um erro enquanto o servidor processava sua requisição.</h2>
 
 @if (Model.ShowRequestId)
 {

@@ -1,4 +1,13 @@
-﻿@page
+﻿@*
+    UNA - Tecnologia em Analise e Desenvolvimento de sistemas
+    Disciplina:Práticas de Programação
+    Professor: Luiz Eduardo Carneiro
+    Período: 2º semestre/2019
+    Autores: Gercy Campos
+    Informações: Página com confirmação de exclusao de centro de custo
+*@
+
+@page
 @model UNA.PraticasProgramacao.Web.Pages.CentroCustos.DeleteModel
 
 @{
@@ -24,7 +33,7 @@
             @Html.DisplayFor(model => model.CentroCusto.Responsavel)
         </dd>
     </dl>
-    
+
     <form method="post">
         <input type="hidden" asp-for="CentroCusto.IdCentroCusto" />
         <input type="submit" value="Excluir" class="btn btn-default" /> |

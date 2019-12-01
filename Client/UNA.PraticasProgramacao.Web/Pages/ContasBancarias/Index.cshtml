@@ -1,4 +1,13 @@
-﻿@page
+﻿@*
+    UNA - Tecnologia em Analise e Desenvolvimento de sistemas
+    Disciplina:Práticas de Programação
+    Professor: Luiz Eduardo Carneiro
+    Período: 2º semestre/2019
+    Autores: Gercy Campos
+    Informações: Página para exibicao e manutençao das contas bancarias
+*@
+
+@page
 @model UNA.PraticasProgramacao.Web.Pages.ContasBancarias.IndexModel
 
 @{
@@ -30,26 +39,34 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model.ContaBancaria) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Banco)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Agencia)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.NumeroConta)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.SaldoInicial)
-            </td>
-            <td>
-                <a asp-page="./Edit" asp-route-id="@item.IdContaBancaria">Editar</a> |
-                <a asp-page="./Details" asp-route-id="@item.IdContaBancaria">Detalhes</a> |
-                <a asp-page="./Delete" asp-route-id="@item.IdContaBancaria">Remover</a>
-            </td>
-        </tr>
-}
+        @foreach (var item in Model.ContaBancaria)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Banco)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Agencia)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NumeroConta)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SaldoInicial)
+                </td>
+                <td>
+
+                    <a asp-page="./Edit" asp-route-id="@item.IdContaBancaria">
+                        <i class="fas fa-edit"></i>
+                    </a> |
+                    <a asp-page="./Details" asp-route-id="@item.IdContaBancaria">
+                        <i class="fas fa-expand"></i>
+                    </a> |
+                    <a asp-page="./Delete" asp-route-id="@item.IdContaBancaria">
+                        <i class="fas fa-ban"></i>
+                    </a>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>

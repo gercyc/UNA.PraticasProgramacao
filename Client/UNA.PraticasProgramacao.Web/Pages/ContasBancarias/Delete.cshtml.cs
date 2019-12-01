@@ -12,9 +12,9 @@ namespace UNA.PraticasProgramacao.Web.Pages.ContasBancarias
 {
     public class DeleteModel : PageModel
     {
-        private readonly UNA.PraticasProgramacao.Web.Data.ApplicationDbContext _context;
+        private readonly ApplicationDbContext _context;
 
-        public DeleteModel(UNA.PraticasProgramacao.Web.Data.ApplicationDbContext context)
+        public DeleteModel(ApplicationDbContext context)
         {
             _context = context;
         }
@@ -24,26 +24,25 @@ namespace UNA.PraticasProgramacao.Web.Pages.ContasBancarias
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
+
             if (id == null)
-            {
                 return NotFound();
-            }
 
             ContaBancaria = await _context.ContaBancaria.FirstOrDefaultAsync(m => m.IdContaBancaria == id);
 
             if (ContaBancaria == null)
-            {
                 return NotFound();
-            }
+
             return Page();
         }
 
         public async Task<IActionResult> OnPostAsync(int? id)
         {
+            if (HasChild(id))
+                return Partial("_HasRelations");
+
             if (id == null)
-            {
                 return NotFound();
-            }
 
             ContaBancaria = await _context.ContaBancaria.FindAsync(id);
 
@@ -54,6 +53,10 @@ namespace UNA.PraticasProgramacao.Web.Pages.ContasBancarias
             }
 
             return RedirectToPage("./Index");
+        }
+        private bool HasChild(int? id)
+        {
+            return _context.LancamentoFinanceiro.Where(l => l.IdContaBancaria == id).FirstOrDefault() != null;
         }
     }
 }

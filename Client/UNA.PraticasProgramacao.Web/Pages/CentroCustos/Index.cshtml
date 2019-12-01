@@ -1,4 +1,12 @@
-﻿@page
+﻿@*
+    UNA - Tecnologia em Analise e Desenvolvimento de sistemas
+    Disciplina:Práticas de Programação
+    Professor: Luiz Eduardo Carneiro
+    Período: 2º semestre/2019
+    Autores: Gercy Campos
+    Informações: Página para exibicao e manutençao dos centros de custos
+*@
+@page
 @model UNA.PraticasProgramacao.Web.Pages.CentroCustos.IndexModel
 
 @{
@@ -24,20 +32,21 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model.CentroCusto) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.NomeCentroCusto)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Responsavel)
-            </td>
-            <td>
-                <a asp-page="./Edit" asp-route-id="@item.IdCentroCusto">Editar</a> |
-                <a asp-page="./Details" asp-route-id="@item.IdCentroCusto">Detalhes</a> |
-                <a asp-page="./Delete" asp-route-id="@item.IdCentroCusto">Remover</a>
-            </td>
-        </tr>
-}
+        @foreach (var item in Model.CentroCusto)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NomeCentroCusto)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Responsavel)
+                </td>
+                <td>
+                    <a asp-page="./Edit" asp-route-id="@item.IdCentroCusto"> <i class="fas fa-edit"></i></a> |
+                    <a asp-page="./Details" asp-route-id="@item.IdCentroCusto"> <i class="fas fa-expand"></i></a> |
+                    <a asp-page="./Delete" asp-route-id="@item.IdCentroCusto"><i class="fas fa-ban"></i></a>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>

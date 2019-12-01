@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -13,11 +14,14 @@ namespace UNA.PraticasProgramacao.Web.Pages.ContasBancarias
 {
     public class EditModel : PageModel
     {
-        private readonly UNA.PraticasProgramacao.Web.Data.ApplicationDbContext _context;
+        private readonly ApplicationDbContext _context;
+        private readonly UserManager<IdentityUser> _userManager;
 
-        public EditModel(UNA.PraticasProgramacao.Web.Data.ApplicationDbContext context)
+        public EditModel(ApplicationDbContext context, UserManager<IdentityUser> userManager)
         {
             _context = context;
+            _userManager = userManager;
+
         }
 
         [BindProperty]
@@ -45,7 +49,6 @@ namespace UNA.PraticasProgramacao.Web.Pages.ContasBancarias
             {
                 return Page();
             }
-
             _context.Attach(ContaBancaria).State = EntityState.Modified;
 
             try

@@ -1,0 +1,1 @@
+﻿Neste pasta 'Areas' é onde ficam as páginas do framework ASP.NET Identity

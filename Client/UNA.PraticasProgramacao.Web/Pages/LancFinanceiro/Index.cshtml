@@ -1,4 +1,13 @@
-﻿@page
+﻿@*
+    UNA - Tecnologia em Analise e Desenvolvimento de sistemas
+    Disciplina:Práticas de Programação
+    Professor: Luiz Eduardo Carneiro
+    Período: 2º semestre/2019
+    Autores: Gercy Campos
+    Informações: Página para exibição da movimentacao financeira do usuario
+*@
+
+@page
 @model UNA.PraticasProgramacao.Web.Pages.LancFinanceiro.IndexModel
 
 @{
@@ -8,94 +17,124 @@
 
 <h2>Movimentação Financeira</h2>
 
-<p>
-    <a asp-page="Create">Criar novo</a>
-</p>
+<p> <a asp-page="Create">Criar novo</a></p>
+<p> <a href="#" data-toggle="modal" data-target="#transfModal">Nova transferência</a></p>
+
 <form method="post">
     <div class="col-sm-4">
         <label asp-for="SelCount" class="control-label">Exibir: </label>
         <select asp-for="SelCount" class="form-control" asp-items="ViewBag.Qtd" onchange="this.form.submit()"></select>
     </div>
 </form>
-    <hr />
-    <div>
-    </div>
-    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-        <thead>
+<hr />
+<div>
+</div>
+<table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.LancamentosFinanceiros[0].DataVencimento)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LancamentosFinanceiros[0].TipoLancamento)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LancamentosFinanceiros[0].HistoricoLancamento)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LancamentosFinanceiros[0].ValorLancamento)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LancamentosFinanceiros[0].DataPagamento)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LancamentosFinanceiros[0].CentroCusto)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LancamentosFinanceiros[0].ContaBancaria)
+            </th>
+            <th>Ações</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.LancamentosFinanceiros)
+        {
             <tr>
-                <th>
-                    @Html.DisplayNameFor(model => model.LancamentoFinanceiro[0].NumeroLancamento)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.LancamentoFinanceiro[0].DataCriacao)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.LancamentoFinanceiro[0].DataVencimento)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.LancamentoFinanceiro[0].TipoLancamento)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.LancamentoFinanceiro[0].HistoricoLancamento)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.LancamentoFinanceiro[0].ValorLancamento)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.LancamentoFinanceiro[0].DataPagamento)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.LancamentoFinanceiro[0].CentroCusto)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.LancamentoFinanceiro[0].ContaBancaria)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.LancamentoFinanceiro[0].Parceiro)
-                </th>
-                <th></th>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DataVencimento)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TipoLancamento)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.HistoricoLancamento)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ValorLancamento)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DataPagamento)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CentroCusto.NomeCentroCusto)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ContaBancaria.NomeConta)
+                </td>
+                <td>
+                    <a asp-page="./Edit" asp-route-id="@item.IdLancamentoFinanceiro"><i class="fas fa-edit"></i></a> |
+                    <a asp-page="./Details" asp-route-id="@item.IdLancamentoFinanceiro"><i class="fas fa-expand"></i></a> |
+                    <a asp-page="./Delete" asp-route-id="@item.IdLancamentoFinanceiro"><i class="fas fa-ban"></i></a>
+                </td>
             </tr>
-        </thead>
-        <tbody>
-            @foreach (var item in Model.LancamentoFinanceiro)
-            {
-                <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.NumeroLancamento)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.DataCriacao)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.DataVencimento)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.TipoLancamento)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.HistoricoLancamento)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.ValorLancamento)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.DataPagamento)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.CentroCusto.NomeCentroCusto)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.ContaBancaria.Agencia)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Parceiro.NomeParceiro)
-                    </td>
-                    <td>
-                        <a asp-page="./Edit" asp-route-id="@item.IdLancamentoFinanceiro">Editar</a> |
-                        <a asp-page="./Details" asp-route-id="@item.IdLancamentoFinanceiro">Detalhes</a> |
-                        <a asp-page="./Delete" asp-route-id="@item.IdLancamentoFinanceiro">Remover</a>
-                    </td>
-                </tr>
-            }
-        </tbody>
-    </table>
+        }
+    </tbody>
+</table>
+
+
+<!-- Transf Modal-->
+<div class="modal fade" id="transfModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Transferência entre contas</h5>
+                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">
+
+                <form method="post" asp-page-handler="CriarTransferencia">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div class="form-group">
+                        <label class="control-label">Conta Origem</label>
+                        <select asp-for="TransferenciaObj.ContaOrigem" class="form-control" asp-items="ViewBag.IdContaBancariaOrigem"></select>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label">Conta Destino</label>
+                        <select asp-for="TransferenciaObj.ContaDestino" class="form-control" asp-items="ViewBag.IdContaBancariaDestino"></select>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label">Data</label>
+                        <input asp-for="TransferenciaObj.Data" class="form-control" />
+                        <span asp-validation-for="TransferenciaObj.Data" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="TransferenciaObj.Valor" class="control-label"></label>
+                        <input asp-for="TransferenciaObj.Valor" class="form-control" />
+                        <span asp-validation-for="TransferenciaObj.Valor" class="text-danger"></span>
+                    </div>
+
+                    @*<div class="form-group">
+                            <input type="submit" value="Cadastrar" class="btn btn-default" />
+                        </div>*@
+                    <div class="modal-footer">
+                        <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
+                        <button type="submit" class="nav-link btn btn-primary" >Transferir</button>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+</div>

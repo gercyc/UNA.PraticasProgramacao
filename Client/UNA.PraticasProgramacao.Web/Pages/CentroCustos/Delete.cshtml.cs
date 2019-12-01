@@ -12,9 +12,9 @@ namespace UNA.PraticasProgramacao.Web.Pages.CentroCustos
 {
     public class DeleteModel : PageModel
     {
-        private readonly UNA.PraticasProgramacao.Web.Data.ApplicationDbContext _context;
+        private readonly ApplicationDbContext _context;
 
-        public DeleteModel(UNA.PraticasProgramacao.Web.Data.ApplicationDbContext context)
+        public DeleteModel(ApplicationDbContext context)
         {
             _context = context;
         }
@@ -40,10 +40,11 @@ namespace UNA.PraticasProgramacao.Web.Pages.CentroCustos
 
         public async Task<IActionResult> OnPostAsync(int? id)
         {
+            if (HasChild(id))
+                return Partial("_HasRelations");
+
             if (id == null)
-            {
                 return NotFound();
-            }
 
             CentroCusto = await _context.CentroCusto.FindAsync(id);
 
@@ -54,6 +55,11 @@ namespace UNA.PraticasProgramacao.Web.Pages.CentroCustos
             }
 
             return RedirectToPage("./Index");
+        }
+
+        private bool HasChild(int? id)
+        {
+            return _context.LancamentoFinanceiro.Where(l => l.IdCentroCusto == id).FirstOrDefault() != null;
         }
     }
 }

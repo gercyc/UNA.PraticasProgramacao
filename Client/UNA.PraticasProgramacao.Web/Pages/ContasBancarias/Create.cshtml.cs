@@ -13,10 +13,10 @@ namespace UNA.PraticasProgramacao.Web.Pages.ContasBancarias
 {
     public class CreateModel : PageModel
     {
-        private readonly UNA.PraticasProgramacao.Web.Data.ApplicationDbContext _context;
+        private readonly ApplicationDbContext _context;
         private readonly UserManager<IdentityUser> _userManager;
 
-        public CreateModel(UNA.PraticasProgramacao.Web.Data.ApplicationDbContext context, UserManager<IdentityUser> userManager)
+        public CreateModel(ApplicationDbContext context, UserManager<IdentityUser> userManager)
         {
             _context = context;
             _userManager = userManager;

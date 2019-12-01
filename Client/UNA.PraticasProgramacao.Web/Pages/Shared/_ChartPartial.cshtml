@@ -1,20 +1,30 @@
-﻿@using Microsoft.AspNetCore.Identity
+﻿@*
+    UNA - Tecnologia em Analise e Desenvolvimento de sistemas
+    Disciplina:Práticas de Programação
+    Professor: Luiz Eduardo Carneiro
+    Período: 2º semestre/2019
+    Autores: Gercy Campos
+    Informações: Página parcial para exibição dos graficos
+*@
+
+
+@using Microsoft.AspNetCore.Identity
 @using UNA.PraticasProgramacao.Web.BaseApis
 
 @inject SignInManager<IdentityUser> SignInManager
 @inject UserManager<IdentityUser> UserManager
+@inject ApplicationDbContext DbContext
 
 @{
-    string url = string.Format("{0}://{1}/api/financeiro/chartdata", this.Context.Request.Scheme, this.Context.Request.Host);
-    string urlPie = string.Format("{0}://{1}/api/financeiro/PieChartData", this.Context.Request.Scheme, this.Context.Request.Host);
 
-    List<LineChartData> ChartDataList = new List<LineChartData>();
-    List<PieChartData> PieDataList = new List<PieChartData>();
+    List<UNA.PraticasProgramacao.Web.Pages.LineChartData> ChartDataList = new List<UNA.PraticasProgramacao.Web.Pages.LineChartData>();
+    List<UNA.PraticasProgramacao.Web.Pages.PieChartData> PieDataList = new List<UNA.PraticasProgramacao.Web.Pages.PieChartData>();
+
 
     if (SignInManager.IsSignedIn(User))
     {
-        ChartDataList = await ApiUtil.GetChartData<LineChartData>(url);
-        PieDataList = await ApiUtil.GetChartData<PieChartData>(urlPie);
+        ChartDataList = ApiUtil.GetChartData(DbContext, UserManager, User).ToList();
+        PieDataList = ApiUtil.GetPieChartData(DbContext, UserManager, User).ToList();
     }
 
     var XLabels = Newtonsoft.Json.JsonConvert.SerializeObject(ChartDataList.Select(x => x.Periodo).ToList());
@@ -35,18 +45,6 @@
             <!-- Card Header - Dropdown -->
             <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
                 <h6 class="m-0 font-weight-bold text-primary">Fluxo de Caixa (Pagar + Receber)</h6>
-                <div class="dropdown no-arrow">
-                    <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
-                    </a>
-                    <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in" aria-labelledby="dropdownMenuLink">
-                        <div class="dropdown-header">Dropdown Header:</div>
-                        <a class="dropdown-item" href="#">Action</a>
-                        <a class="dropdown-item" href="#">Another action</a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="#">Something else here</a>
-                    </div>
-                </div>
             </div>
 
             <!-- Card Body -->
@@ -64,18 +62,6 @@
             <!-- Card Header - Dropdown -->
             <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
                 <h6 class="m-0 font-weight-bold text-primary">Despesas por Centro de Custo</h6>
-                <div class="dropdown no-arrow">
-                    <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
-                    </a>
-                    <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in" aria-labelledby="dropdownMenuLink">
-                        <div class="dropdown-header">Dropdown Header:</div>
-                        <a class="dropdown-item" href="#">Action</a>
-                        <a class="dropdown-item" href="#">Another action</a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="#">Something else here</a>
-                    </div>
-                </div>
             </div>
 
             <!-- Card Body -->
@@ -92,7 +78,6 @@
         <!-- Page level plugins -->
         <script src="~/vendor/chart.js/Chart.min.js"></script>
         <!-- Page level custom scripts -->
-        @*<script src="~/js/demo/chart-area-demo.js"></script>*@
         <script src="~/js/demo/chart-bar-demo.js"></script>
         <script src="~/js/demo/chart-pie-demo.js"></script>
 
@@ -227,13 +212,25 @@
 
             // Pie Chart Example
             var ctx = document.getElementById("myPieChart2");
+            var coloR = [];
+            var dynamicColors = function() {
+            var r = Math.floor(Math.random() * 255);
+            var g = Math.floor(Math.random() * 255);
+            var b = Math.floor(Math.random() * 255);
+            return "rgb(" + r + "," + g + "," + b + ")";
+         };
+
+         for (var i in @Html.Raw(XLabelsPie)) {
+            coloR.push(dynamicColors());
+         }
+
             var myPieChart = new Chart(ctx, {
                 type: 'doughnut',
                 data: {
                     labels: @Html.Raw(XLabelsPie),
                     datasets: [{
                         data: @Html.Raw(YValuesPie),
-                        backgroundColor: ['#4e73df', '#1cc88a', '#36b9cc'],
+                        backgroundColor: coloR,
                         hoverBackgroundColor: ['#2e59d9', '#17a673', '#2c9faf'],
                         hoverBorderColor: "rgba(234, 236, 244, 1)",
                     }],

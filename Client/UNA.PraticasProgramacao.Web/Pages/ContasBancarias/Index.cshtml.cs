@@ -23,7 +23,7 @@ namespace UNA.PraticasProgramacao.Web.Pages.ContasBancarias
 
         public async Task OnGetAsync()
         {
-            ContaBancaria = await _context.ContaBancaria.ToListAsync();
+            ContaBancaria = await _context.ContaBancaria.Where(c => c.UserId == User.Claims.FirstOrDefault().Value).ToListAsync();
         }
     }
 }

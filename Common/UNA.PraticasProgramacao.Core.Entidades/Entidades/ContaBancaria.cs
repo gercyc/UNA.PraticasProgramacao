@@ -1,3 +1,11 @@
+/*
+    UNA - Tecnologia em Analise e Desenvolvimento de sistemas
+    Disciplina:Práticas de Programação
+    Professor: Luiz Eduardo Carneiro
+    Período: 2º semestre/2019
+    Autores: Gercy Campos
+    Informações: Entidade Conta Bancária
+*/
 namespace UNA.PraticasProgramacao.Core.Entidades
 {
     using Microsoft.AspNetCore.Identity;
@@ -37,6 +45,15 @@ namespace UNA.PraticasProgramacao.Core.Entidades
 
         [ForeignKey("UserId")]
         public virtual IdentityUser Usuario { get; set; }
+
+        [NotMapped]
+        public string NomeConta
+        {
+            get
+            {
+                return string.Format("{0} - AG: {1} - Conta: {2}", Banco, Agencia, NumeroConta);
+            }
+        }
 
     }
 }

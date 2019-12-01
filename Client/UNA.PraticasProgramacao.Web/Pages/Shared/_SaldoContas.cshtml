@@ -1,0 +1,74 @@
+﻿@*
+    UNA - Tecnologia em Analise e Desenvolvimento de sistemas
+    Disciplina:Práticas de Programação
+    Professor: Luiz Eduardo Carneiro
+    Período: 2º semestre/2019
+    Autores: Gercy Campos
+    Informações: Pagina parcial para exibicao de tabela com saldo das contas
+*@
+
+
+@using Microsoft.AspNetCore.Identity
+@using UNA.PraticasProgramacao.Web.BaseApis
+
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
+@inject ApplicationDbContext DbContext
+
+@{
+    List<UNA.PraticasProgramacao.Web.Pages.Shared.SaldoContas> SaldoContas = new List<UNA.PraticasProgramacao.Web.Pages.Shared.SaldoContas>();
+
+    if (SignInManager.IsSignedIn(User))
+    {
+        SaldoContas = ApiUtil.GetSaldoContas(DbContext, UserManager, User).ToList();
+    }
+}
+
+<div class="container-fluid">
+    <div class="card shadow">
+        <div class="card-header shadow">
+            <h6 class="m-0 font-weight-bold text-primary">Saldo das Contas</h6>
+        </div>
+        <div class="card-body">
+
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>
+                            Banco
+                        </th>
+                        <th>
+                            Agencia
+                        </th>
+                        <th>
+                            Numero Conta
+                        </th>
+                        <th>
+                            Saldo
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var saldo in SaldoContas)
+                    {
+                        <tr>
+                            <td>
+                                @saldo.Banco
+                            </td>
+                            <td>
+                                @saldo.Agencia
+                            </td>
+                            <td>
+                                @saldo.Conta
+                            </td>
+                            <td>
+                                @saldo.Saldo
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+</div>

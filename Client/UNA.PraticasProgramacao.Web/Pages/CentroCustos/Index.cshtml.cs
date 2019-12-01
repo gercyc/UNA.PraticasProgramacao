@@ -12,18 +12,18 @@ namespace UNA.PraticasProgramacao.Web.Pages.CentroCustos
 {
     public class IndexModel : PageModel
     {
-        private readonly UNA.PraticasProgramacao.Web.Data.ApplicationDbContext _context;
+        private readonly ApplicationDbContext _context;
 
-        public IndexModel(UNA.PraticasProgramacao.Web.Data.ApplicationDbContext context)
+        public IndexModel(ApplicationDbContext context)
         {
             _context = context;
         }
 
-        public IList<CentroCusto> CentroCusto { get;set; }
+        public IList<CentroCusto> CentroCusto { get; set; }
 
         public async Task OnGetAsync()
         {
-            CentroCusto = await _context.CentroCusto.ToListAsync();
+            CentroCusto = await _context.CentroCusto.Where(c => c.UserId == User.Claims.FirstOrDefault().Value).ToListAsync();
         }
     }
 }

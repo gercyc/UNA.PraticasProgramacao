@@ -1,4 +1,14 @@
-﻿@page
+﻿@*
+    UNA - Tecnologia em Analise e Desenvolvimento de sistemas
+    Disciplina:Práticas de Programação
+    Professor: Luiz Eduardo Carneiro
+    Período: 2º semestre/2019
+    Autores: Gercy Campos
+    Informações: Página para edição de uma conta bancaria
+*@
+
+
+@page
 @model UNA.PraticasProgramacao.Web.Pages.ContasBancarias.EditModel
 
 @{
@@ -13,6 +23,7 @@
         <form method="post">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="ContaBancaria.IdContaBancaria" />
+            <input type="hidden" asp-for="ContaBancaria.UserId" />
             <div class="form-group">
                 <label asp-for="ContaBancaria.Banco" class="control-label"></label>
                 <input asp-for="ContaBancaria.Banco" class="form-control" />
@@ -30,7 +41,7 @@
             </div>
             <div class="form-group">
                 <label asp-for="ContaBancaria.SaldoInicial" class="control-label"></label>
-                <input asp-for="ContaBancaria.SaldoInicial" class="form-control" />
+                <input asp-for="ContaBancaria.SaldoInicial" class="form-control" asp- />
                 <span asp-validation-for="ContaBancaria.SaldoInicial" class="text-danger"></span>
             </div>
             <div class="form-group">

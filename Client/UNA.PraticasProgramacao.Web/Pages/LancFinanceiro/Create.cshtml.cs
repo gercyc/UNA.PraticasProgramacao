@@ -24,9 +24,9 @@ namespace UNA.PraticasProgramacao.Web.Pages.LancFinanceiro
 
         public IActionResult OnGet()
         {
-        ViewData["IdCentroCusto"] = new SelectList(_context.CentroCusto, "IdCentroCusto", "NomeCentroCusto");
-        ViewData["IdContaBancaria"] = new SelectList(_context.ContaBancaria, "IdContaBancaria", "Agencia");
-        ViewData["IdParceiro"] = new SelectList(_context.Parceiro, "IdParceiro", "NomeParceiro");
+            var userId = _userManager.GetUserId(User);
+            ViewData["IdCentroCusto"] = new SelectList(_context.CentroCusto.Where(c => c.UserId == userId), "IdCentroCusto", "NomeCentroCusto");
+            ViewData["IdContaBancaria"] = new SelectList(_context.ContaBancaria.Where(c => c.UserId == userId), "IdContaBancaria", "NomeConta");
             return Page();
         }
 
@@ -41,6 +41,10 @@ namespace UNA.PraticasProgramacao.Web.Pages.LancFinanceiro
             {
                 return Page();
             }
+
+            LancamentoFinanceiro.ValorLancamento = Convert.ToDecimal(LancamentoFinanceiro.ValorLancamentoStr);
+            LancamentoFinanceiro.NumeroLancamento = new Random().Next().ToString();
+            LancamentoFinanceiro.DataCriacao = DateTime.Now;
             LancamentoFinanceiro.UserId = _userManager.GetUserId(User);
             _context.LancamentoFinanceiro.Add(LancamentoFinanceiro);
             await _context.SaveChangesAsync();

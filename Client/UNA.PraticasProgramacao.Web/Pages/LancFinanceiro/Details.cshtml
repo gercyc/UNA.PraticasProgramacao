@@ -1,4 +1,13 @@
-﻿@page
+﻿@*
+    UNA - Tecnologia em Analise e Desenvolvimento de sistemas
+    Disciplina:Práticas de Programação
+    Professor: Luiz Eduardo Carneiro
+    Período: 2º semestre/2019
+    Autores: Gercy Campos
+    Informações: Página para exibicao de detalhes de uma movimentacao financeira
+*@
+
+@page
 @model UNA.PraticasProgramacao.Web.Pages.LancFinanceiro.DetailsModel
 
 @{
@@ -11,18 +20,6 @@
     <h4>Movimentação Financeira</h4>
     <hr />
     <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.LancamentoFinanceiro.NumeroLancamento)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.LancamentoFinanceiro.NumeroLancamento)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.LancamentoFinanceiro.DataCriacao)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.LancamentoFinanceiro.DataCriacao)
-        </dd>
         <dt>
             @Html.DisplayNameFor(model => model.LancamentoFinanceiro.DataVencimento)
         </dt>
@@ -63,13 +60,7 @@
             @Html.DisplayNameFor(model => model.LancamentoFinanceiro.ContaBancaria)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.LancamentoFinanceiro.ContaBancaria.Agencia)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.LancamentoFinanceiro.Parceiro)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.LancamentoFinanceiro.Parceiro.IdParceiro)
+            @Html.DisplayFor(model => model.LancamentoFinanceiro.ContaBancaria.NomeConta)
         </dd>
     </dl>
 </div>

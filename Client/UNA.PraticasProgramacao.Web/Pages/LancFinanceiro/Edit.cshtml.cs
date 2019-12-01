@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -13,11 +14,13 @@ namespace UNA.PraticasProgramacao.Web.Pages.LancFinanceiro
 {
     public class EditModel : PageModel
     {
-        private readonly UNA.PraticasProgramacao.Web.Data.ApplicationDbContext _context;
+        private readonly ApplicationDbContext _context;
+        private readonly UserManager<IdentityUser> _userManager;
 
-        public EditModel(UNA.PraticasProgramacao.Web.Data.ApplicationDbContext context)
+        public EditModel(ApplicationDbContext context, UserManager<IdentityUser> userManager)
         {
             _context = context;
+            _userManager = userManager;
         }
 
         [BindProperty]
@@ -29,19 +32,17 @@ namespace UNA.PraticasProgramacao.Web.Pages.LancFinanceiro
             {
                 return NotFound();
             }
-
+            var userId = _userManager.GetUserId(User);
             LancamentoFinanceiro = await _context.LancamentoFinanceiro
                 .Include(l => l.CentroCusto)
-                .Include(l => l.ContaBancaria)
-                .Include(l => l.Parceiro).FirstOrDefaultAsync(m => m.IdLancamentoFinanceiro == id);
+                .Include(l => l.ContaBancaria).FirstOrDefaultAsync(m => m.IdLancamentoFinanceiro == id);
 
             if (LancamentoFinanceiro == null)
             {
                 return NotFound();
             }
-           ViewData["IdCentroCusto"] = new SelectList(_context.CentroCusto, "IdCentroCusto", "NomeCentroCusto");
-           ViewData["IdContaBancaria"] = new SelectList(_context.ContaBancaria, "IdContaBancaria", "Agencia");
-           ViewData["IdParceiro"] = new SelectList(_context.Parceiro, "IdParceiro", "NomeParceiro");
+            ViewData["IdCentroCusto"] = new SelectList(_context.CentroCusto.Where(c => c.UserId == userId), "IdCentroCusto", "NomeCentroCusto");
+            ViewData["IdContaBancaria"] = new SelectList(_context.ContaBancaria.Where(c => c.UserId == userId), "IdContaBancaria", "NomeConta");
             return Page();
         }
 
@@ -51,7 +52,7 @@ namespace UNA.PraticasProgramacao.Web.Pages.LancFinanceiro
             {
                 return Page();
             }
-
+            LancamentoFinanceiro.ValorLancamento = Convert.ToDecimal(LancamentoFinanceiro.ValorLancamentoStr);
             _context.Attach(LancamentoFinanceiro).State = EntityState.Modified;
 
             try

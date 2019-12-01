@@ -12,9 +12,9 @@ namespace UNA.PraticasProgramacao.Web.Pages.ContasBancarias
 {
     public class DetailsModel : PageModel
     {
-        private readonly UNA.PraticasProgramacao.Web.Data.ApplicationDbContext _context;
+        private readonly ApplicationDbContext _context;
 
-        public DetailsModel(UNA.PraticasProgramacao.Web.Data.ApplicationDbContext context)
+        public DetailsModel(ApplicationDbContext context)
         {
             _context = context;
         }

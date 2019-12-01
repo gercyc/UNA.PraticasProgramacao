@@ -1,0 +1,31 @@
+﻿@*
+    UNA - Tecnologia em Analise e Desenvolvimento de sistemas
+    Disciplina:Práticas de Programação
+    Professor: Luiz Eduardo Carneiro
+    Período: 2º semestre/2019
+    Autores: Gercy Campos
+    Informações: Página parcial para exibição de mensagem quando é feita uma tentativa de exclusao de um registro que contenha filhos
+*@
+
+@using Microsoft.AspNetCore.Identity
+@using UNA.PraticasProgramacao.Web.BaseApis
+
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
+@inject ApplicationDbContext DbContext
+
+@{
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+
+<div class="container-fluid">
+    <div class="card shadow">
+        <div class="card-header shadow">
+            <h6 class="m-0 font-weight-bold text-primary">Não é possível excluir</h6>
+        </div>
+        <div class="card-body">
+            <p>Não é possível excluir o registro selecionado pois ele possui relacionamentos. Verifique se não está sendo utilizado em algum lançamento financeiro </p>
+        </div>
+
+    </div>
+</div>
