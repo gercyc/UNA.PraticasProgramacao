@@ -1,3 +1,11 @@
+/*
+    UNA - Tecnologia em Analise e Desenvolvimento de sistemas
+    Disciplina:Práticas de Programação
+    Professor: Luiz Eduardo Carneiro
+    Período: 2º semestre/2019
+    Autores: Gercy Campos
+    Informações: Classe responsavel por fazer o login na aplicacao
+*/
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -23,19 +31,12 @@ namespace UNA.PraticasProgramacao.Web.Areas.Identity.Pages.Account
     {
         private readonly UserManager<IdentityUser> _userManager;
         private readonly SignInManager<IdentityUser> _signInManager;
-        private readonly ILogger<LoginModel> _logger;
-        private readonly IEmailSender _emailSender;
 
         public LoginModel(SignInManager<IdentityUser> signInManager,
-            ILogger<LoginModel> logger,
-            UserManager<IdentityUser> userManager,
-            IEmailSender emailSender
-            )
+            UserManager<IdentityUser> userManager)
         {
             _userManager = userManager;
             _signInManager = signInManager;
-            _emailSender = emailSender;
-            _logger = logger;
         }
 
         [BindProperty]
@@ -86,102 +87,26 @@ namespace UNA.PraticasProgramacao.Web.Areas.Identity.Pages.Account
 
             if (ModelState.IsValid)
             {
-
-
                 // This doesn't count login failures towards account lockout
                 // To enable password failures to trigger account lockout, set lockoutOnFailure: true
                 var result = await _signInManager.PasswordSignInAsync(Input.Email, Input.Password, Input.RememberMe, lockoutOnFailure: true);
-                IdentityUser user = await _userManager.FindByEmailAsync(Input.Email);
-                
-                var claims = await _userManager.GetClaimsAsync(user);
+
                 if (result.Succeeded)
                 {
-                    _logger.LogInformation("User logged in.");
-
-                   // ClaimsIdentity identity = new ClaimsIdentity(
-                   //new GenericIdentity(Input.Email, "User"),
-                   //new[] {
-                   //     new Claim(JwtRegisteredClaimNames.Jti, user.Id),
-                   //     new Claim(JwtRegisteredClaimNames.UniqueName, Input.Email)
-                   //});
-
-                   // ClaimsPrincipal claimsPrincipal = new ClaimsPrincipal(identity);
-                   // SignIn(claimsPrincipal, "Bearer");
-                   // DateTime dataCriacao = DateTime.Now;
-                   // DateTime dataExpiracao = dataCriacao +
-                   //     TimeSpan.FromSeconds(_tokenConfigurations.Seconds);
-
-                   // var handler = new JwtSecurityTokenHandler();
-                   // var securityToken = handler.CreateToken(new SecurityTokenDescriptor
-                   // {
-                   //     Issuer = _tokenConfigurations.Issuer,
-                   //     Audience = _tokenConfigurations.Audience,
-                   //     SigningCredentials = _signingConfigurations.SigningCredentials,
-                   //     Subject = identity,
-                   //     NotBefore = dataCriacao,
-                   //     Expires = dataExpiracao
-                   // });
-                   // var token = handler.WriteToken(securityToken);
-                    //HttpContext.User = claimsPrincipal;
-                    //return new
-                    //{
-                    //    authenticated = true,
-                    //    created = dataCriacao.ToString("yyyy-MM-dd HH:mm:ss"),
-                    //    expiration = dataExpiracao.ToString("yyyy-MM-dd HH:mm:ss"),
-                    //    accessToken = token,
-                    //    userId = userIdentity.Id,
-                    //    message = "OK"
-                    //};
-                    ;
-
                     return LocalRedirect(returnUrl);
-                }
-                if (result.RequiresTwoFactor)
-                {
-                    return RedirectToPage("./LoginWith2fa", new { ReturnUrl = returnUrl, RememberMe = Input.RememberMe });
                 }
                 if (result.IsLockedOut)
                 {
-                    _logger.LogWarning("User account locked out.");
                     return RedirectToPage("./Lockout");
                 }
                 else
                 {
-                    ModelState.AddModelError(string.Empty, "Invalid login attempt.");
+                    ModelState.AddModelError(string.Empty, "Usuário ou senha incorretos.");
                     return Page();
                 }
             }
 
             // If we got this far, something failed, redisplay form
-            return Page();
-        }
-
-        public async Task<IActionResult> OnPostSendVerificationEmailAsync()
-        {
-            if (!ModelState.IsValid)
-            {
-                return Page();
-            }
-
-            var user = await _userManager.FindByEmailAsync(Input.Email);
-            if (user == null)
-            {
-                ModelState.AddModelError(string.Empty, "Verification email sent. Please check your email.");
-            }
-
-            var userId = await _userManager.GetUserIdAsync(user);
-            var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
-            var callbackUrl = Url.Page(
-                "/Account/ConfirmEmail",
-                pageHandler: null,
-                values: new { userId = userId, code = code },
-                protocol: Request.Scheme);
-            await _emailSender.SendEmailAsync(
-                Input.Email,
-                "Confirm your email",
-                $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
-
-            ModelState.AddModelError(string.Empty, "Verification email sent. Please check your email.");
             return Page();
         }
     }

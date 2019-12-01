@@ -1,4 +1,13 @@
-﻿using System;
+﻿/*
+    UNA - Tecnologia em Analise e Desenvolvimento de sistemas
+    Disciplina:Práticas de Programação
+    Professor: Luiz Eduardo Carneiro
+    Período: 2º semestre/2019
+    Autores: Gercy Campos
+    Informações: Classe responsavel por conectar a pagina Create ao backend da aplicacao. 
+    No metodo OnGet a pagina é renderizada, no metodo OnPostAsync é o que ocorre quando o usuário clica em Salvar
+*/
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -30,8 +39,6 @@ namespace UNA.PraticasProgramacao.Web.Pages.CentroCustos
         [BindProperty]
         public CentroCusto CentroCusto { get; set; }
 
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for
-        // more details see https://aka.ms/RazorPagesCRUD.
         public async Task<IActionResult> OnPostAsync()
         {
             if (!ModelState.IsValid)

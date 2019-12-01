@@ -1,3 +1,11 @@
+/*
+    UNA - Tecnologia em Analise e Desenvolvimento de sistemas
+    Disciplina:Práticas de Programação
+    Professor: Luiz Eduardo Carneiro
+    Período: 2º semestre/2019
+    Autores: Gercy Campos
+    Informações: Classe com as rotas das paginas relacionadas a area pessoal
+*/
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,11 +22,7 @@ namespace UNA.PraticasProgramacao.Web.Areas.Identity.Pages.Account.Manage
 
         public static string ChangePassword => "ChangePassword";
 
-        public static string ExternalLogins => "ExternalLogins";
-
         public static string PersonalData => "PersonalData";
-
-        public static string TwoFactorAuthentication => "TwoFactorAuthentication";
 
         public static string IndexNavClass(ViewContext viewContext) => PageNavClass(viewContext, Index);
 
@@ -26,11 +30,7 @@ namespace UNA.PraticasProgramacao.Web.Areas.Identity.Pages.Account.Manage
 
         public static string ChangePasswordNavClass(ViewContext viewContext) => PageNavClass(viewContext, ChangePassword);
 
-        public static string ExternalLoginsNavClass(ViewContext viewContext) => PageNavClass(viewContext, ExternalLogins);
-
         public static string PersonalDataNavClass(ViewContext viewContext) => PageNavClass(viewContext, PersonalData);
-
-        public static string TwoFactorAuthenticationNavClass(ViewContext viewContext) => PageNavClass(viewContext, TwoFactorAuthentication);
 
         private static string PageNavClass(ViewContext viewContext, string page)
         {

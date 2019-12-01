@@ -1,4 +1,13 @@
-﻿using System;
+﻿/*
+    UNA - Tecnologia em Analise e Desenvolvimento de sistemas
+    Disciplina:Práticas de Programação
+    Professor: Luiz Eduardo Carneiro
+    Período: 2º semestre/2019
+    Autores: Gercy Campos
+    Informações: Classe responsavel por conectar a pagina Index ao backend da aplicacao. 
+    No metodo OnGetAsync a pagina é renderizada e é carregada a lista de objetos do banco de dados
+*/
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;

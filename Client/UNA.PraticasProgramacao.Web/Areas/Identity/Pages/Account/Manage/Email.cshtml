@@ -1,3 +1,11 @@
+@*
+    UNA - Tecnologia em Analise e Desenvolvimento de sistemas
+    Disciplina:Práticas de Programação
+    Professor: Luiz Eduardo Carneiro
+    Período: 2º semestre/2019
+    Autores: Gercy Campos
+    Informações: Página de alteracao de email
+*@
 @page
 @model EmailModel
 @{
@@ -22,7 +30,7 @@
                         </div>
                     </div>
                 }
-                 else
+                else
                 {
                     <input asp-for="Email" class="form-control" disabled />
                     <button id="email-verification" type="submit" asp-page-handler="SendVerificationEmail" class="btn btn-link">Enviar email de verificação</button>

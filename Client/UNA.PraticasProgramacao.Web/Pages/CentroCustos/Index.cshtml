@@ -42,9 +42,9 @@
                     @Html.DisplayFor(modelItem => item.Responsavel)
                 </td>
                 <td>
-                    <a asp-page="./Edit" asp-route-id="@item.IdCentroCusto"> <i class="fas fa-edit"></i></a> |
-                    <a asp-page="./Details" asp-route-id="@item.IdCentroCusto"> <i class="fas fa-expand"></i></a> |
-                    <a asp-page="./Delete" asp-route-id="@item.IdCentroCusto"><i class="fas fa-ban"></i></a>
+                    <a asp-page="./Edit" asp-route-id="@item.IdCentroCusto"> <i class="fas fa-edit" title="Editar"></i></a> |
+                    <a asp-page="./Details" asp-route-id="@item.IdCentroCusto"> <i class="fas fa-expand" title="Detalhes"></i></a> |
+                    <a asp-page="./Delete" asp-route-id="@item.IdCentroCusto"><i class="fas fa-ban" title="Excluir"></i></a>
                 </td>
             </tr>
         }

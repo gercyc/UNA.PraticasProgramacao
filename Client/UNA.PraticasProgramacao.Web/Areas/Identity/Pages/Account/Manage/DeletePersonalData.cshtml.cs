@@ -1,3 +1,11 @@
+/*
+    UNA - Tecnologia em Analise e Desenvolvimento de sistemas
+    Disciplina:Práticas de Programação
+    Professor: Luiz Eduardo Carneiro
+    Período: 2º semestre/2019
+    Autores: Gercy Campos
+    Informações: Classe responsavel por fazer a exclusao de dados do usuario
+*/
 using System;
 using System.ComponentModel.DataAnnotations;
 using System.Threading.Tasks;
