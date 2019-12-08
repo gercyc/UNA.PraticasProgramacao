@@ -17,7 +17,8 @@
 
 @{
     List<UNA.PraticasProgramacao.Web.Pages.Shared.SaldoContas> SaldoContas = new List<UNA.PraticasProgramacao.Web.Pages.Shared.SaldoContas>();
-
+    //verifica se o usuario esta autenticado
+    //para exibir o saldo das suas contas
     if (SignInManager.IsSignedIn(User))
     {
         SaldoContas = ApiUtil.GetSaldoContas(DbContext, UserManager, User).ToList();

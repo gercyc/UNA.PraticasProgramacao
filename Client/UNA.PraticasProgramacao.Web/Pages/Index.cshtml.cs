@@ -42,34 +42,42 @@ namespace UNA.PraticasProgramacao.Web.Pages
 
             if (!_signInManager.IsSignedIn(User))
                 return RedirectToPage("Landing");
-
+            //recupera o usuario logado
             var userId = _userManager.GetUserId(User);
 
+            //pega a soma dos lancamentos a receber entre nos proximos 30 dias
             ReceberProx30Dias = _context.LancamentoFinanceiro.Where(l => l.TipoLancamento == EnumTipoLancamento.Receber
-            && l.DataVencimento > DateTime.Now.AddDays(-75)
-            && l.DataVencimento < DateTime.Now.AddDays(30)
+            && l.DataVencimento >= DateTime.Now
+            && l.DataVencimento <= DateTime.Now.AddDays(30)
             && !l.DataPagamento.HasValue
             && l.UserId == userId).Sum(l => l.ValorLancamento).ToString("N2");
-
+            //pega a soma dos lancamentos a pagar nos proximos 30 dias
             PagarProx30Dias = (_context.LancamentoFinanceiro.Where(l => l.TipoLancamento == EnumTipoLancamento.Pagar
-            && l.DataVencimento > DateTime.Now.AddDays(-30)
-            && l.DataVencimento < DateTime.Now.AddDays(30)
+            && l.DataVencimento >= DateTime.Now
+            && l.DataVencimento <= DateTime.Now.AddDays(30)
             && !l.DataPagamento.HasValue
             && l.UserId == userId).Sum(l => l.ValorLancamento) * -1).ToString("N2");
 
+            //qtd dos lancamentos a pagar que nao estao pagos
             int pagar = _context.LancamentoFinanceiro.Where(l => l.TipoLancamento == EnumTipoLancamento.Pagar
             && !l.DataPagamento.HasValue
             && l.UserId == userId).Count();
 
+            //qtd dos lancamentos a receber que nao estao pagos
             int receber = _context.LancamentoFinanceiro.Where(l => l.TipoLancamento == EnumTipoLancamento.Receber
             && !l.DataPagamento.HasValue
             && l.UserId == userId).Count();
-
+            //define as propriedades que serao utilizados na renderizacao do html
             QtdPagar = pagar.ToString();
             QtdReceber = receber.ToString();
+            //renderiza a pagina
             return Page();
         }
 
+        /// <summary>
+        /// recupera os dados do grafico de linhas. Soma todos os lançamentos cadastrados (credito-debito) agrupando por vencimento (MM/YYYY)
+        /// </summary>
+        /// <returns></returns>
         public IEnumerable<LineChartData> GetChartData()
         {
             var lancamentos = _context.LancamentoFinanceiro.AsEnumerable().OrderBy(f => f.DataVencimento);
@@ -81,6 +89,11 @@ namespace UNA.PraticasProgramacao.Web.Pages
 
             return q.AsEnumerable();
         }
+
+        /// <summary>
+        /// recupera os dados do grafico de pizza. Soma todos os lançamentos cadastrados (credito-debito) agrupando por centro de custo
+        /// </summary>
+        /// <returns></returns>
         public IEnumerable<PieChartData> GetPieChartData()
         {
             var lancamentos = _context.LancamentoFinanceiro.Include(l => l.CentroCusto).AsEnumerable().OrderBy(f => f.DataVencimento);
@@ -95,6 +108,7 @@ namespace UNA.PraticasProgramacao.Web.Pages
 
 
     }
+    //classe que representa os dados do grafico de linhas
     public class LineChartData
     {
         public LineChartData()
@@ -104,6 +118,8 @@ namespace UNA.PraticasProgramacao.Web.Pages
         public string Periodo { get; set; }
         public decimal Valor { get; set; }
     }
+
+    //classe que representa os dados do grafico de pizza
     public class PieChartData
     {
         public PieChartData()

@@ -49,6 +49,7 @@ namespace UNA.PraticasProgramacao.Web.Areas.Identity.Pages.Account
         [TempData]
         public string ErrorMessage { get; set; }
 
+        //classe que representa o usuário que foi digitado na pagina de login
         public class InputModel
         {
             [Required]

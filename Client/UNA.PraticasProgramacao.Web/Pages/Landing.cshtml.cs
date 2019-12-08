@@ -16,10 +16,8 @@ namespace UNA.PraticasProgramacao.Web.Pages.Landing
         private readonly UNA.PraticasProgramacao.Web.Data.ApplicationDbContext _context;
         private readonly UserManager<IdentityUser> _userManager;
 
-        public CreateModel(UNA.PraticasProgramacao.Web.Data.ApplicationDbContext context, UserManager<IdentityUser> userManager)
+        public CreateModel()
         {
-            _context = context;
-            _userManager = userManager;
         }
 
         public IActionResult OnGet()
@@ -27,22 +25,5 @@ namespace UNA.PraticasProgramacao.Web.Pages.Landing
             return Page();
         }
 
-        [BindProperty]
-        public CentroCusto CentroCusto { get; set; }
-
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for
-        // more details see https://aka.ms/RazorPagesCRUD.
-        public async Task<IActionResult> OnPostAsync()
-        {
-            if (!ModelState.IsValid)
-            {
-                return Page();
-            }
-            CentroCusto.UserId = _userManager.GetUserId(User);
-            _context.CentroCusto.Add(CentroCusto);
-            await _context.SaveChangesAsync();
-
-            return RedirectToPage("./Index");
-        }
     }
 }

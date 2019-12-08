@@ -38,6 +38,7 @@ namespace UNA.PraticasProgramacao.Web.Pages.CentroCustos
                 return NotFound();
             }
 
+            //localiza o centro a ser deletado
             CentroCusto = await _context.CentroCusto.FirstOrDefaultAsync(m => m.IdCentroCusto == id);
 
             if (CentroCusto == null)
@@ -66,6 +67,7 @@ namespace UNA.PraticasProgramacao.Web.Pages.CentroCustos
             return RedirectToPage("./Index");
         }
 
+        //verifica se o centro a ser excluido possui lancamentos relacionados
         private bool HasChild(int? id)
         {
             return _context.LancamentoFinanceiro.Where(l => l.IdCentroCusto == id).FirstOrDefault() != null;

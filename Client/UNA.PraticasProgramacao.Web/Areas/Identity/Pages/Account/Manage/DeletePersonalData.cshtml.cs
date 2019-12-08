@@ -8,11 +8,13 @@
 */
 using System;
 using System.ComponentModel.DataAnnotations;
+using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
+using UNA.PraticasProgramacao.Web.Data;
 
 namespace UNA.PraticasProgramacao.Web.Areas.Identity.Pages.Account.Manage
 {
@@ -21,15 +23,18 @@ namespace UNA.PraticasProgramacao.Web.Areas.Identity.Pages.Account.Manage
         private readonly UserManager<IdentityUser> _userManager;
         private readonly SignInManager<IdentityUser> _signInManager;
         private readonly ILogger<DeletePersonalDataModel> _logger;
+        private readonly ApplicationDbContext _context;
 
         public DeletePersonalDataModel(
             UserManager<IdentityUser> userManager,
             SignInManager<IdentityUser> signInManager,
-            ILogger<DeletePersonalDataModel> logger)
+            ILogger<DeletePersonalDataModel> logger,
+            ApplicationDbContext context)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _logger = logger;
+            _context = context;
         }
 
         [BindProperty]
@@ -72,6 +77,39 @@ namespace UNA.PraticasProgramacao.Web.Areas.Identity.Pages.Account.Manage
                     ModelState.AddModelError(string.Empty, "Senha incorreta.");
                     return Page();
                 }
+            }
+
+            //remove os lancamentos do usuario
+            var lancs = _context.LancamentoFinanceiro.Where(l => l.UserId == user.Id);
+            if (lancs.Count() > 0)
+            {
+                foreach (var l in lancs)
+                {
+                    _context.LancamentoFinanceiro.Remove(l);
+                }
+                await _context.SaveChangesAsync();
+            }
+
+            //remove os centros de custo do usuario
+            var centros = _context.CentroCusto.Where(l => l.UserId == user.Id);
+            if (centros.Count() > 0)
+            {
+                foreach (var c in centros)
+                {
+                    _context.CentroCusto.Remove(c);
+                }
+                await _context.SaveChangesAsync();
+            }
+
+            //remove as contas bancarias do usuario
+            var contas = _context.ContaBancaria.Where(l => l.UserId == user.Id);
+            if (contas.Count() > 0)
+            {
+                foreach (var c in contas)
+                {
+                    _context.ContaBancaria.Remove(c);
+                }
+                await _context.SaveChangesAsync();
             }
 
             var result = await _userManager.DeleteAsync(user);
